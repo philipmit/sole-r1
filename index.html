@@ -1,41 +1,1240 @@
+
+ 
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>SOLE-R1  </title>
+    <meta
+      name="description"
+      content="SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot RL"
+    />
+    <meta
+      name="keywords"
+      content="GVL, value learning, vision language models, VLM, robotics, reinforcement learning"
+    />
+    <!-- <meta
+      property="og:image"
+      content="https://generative-value-learning.github.io/static/images/icv/method.png"
+    /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot RL
+    </title>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SOLE-R1" />
+    <meta
+      name="twitter:description"
+      content="Recursive Reasoning Over Videos with Vision-Language Models for Embodied Tasks"
+    />
+    <!-- <meta
+      name="twitter:image"
+      content="https://generative-value-learning.github.io/static/images/icv/method.png"
+    /> -->
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <!-- <link rel="icon" href="./static/images/favicon.svg" /> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
     <style>
-      body {
-        margin: 0;
-        min-height: 40vh;
+      * {
+        font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 15px;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      
+      th {
+        border-top: 1.5px solid #000;
+        border-bottom: 1.5px solid #000;
+        padding: 12px 24px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      
+      td {
+        padding: 12px 24px;
+      }
+      
+      tr:last-child td {
+        border-bottom: 1.5px solid #000;
+      }
+      
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+      
+      .method-group {
+        border-bottom: 1.5px solid #000;
+      }
+      
+      .dataset-name, .method-name {
+        font-weight: 500;
+      }
+      
+      .citation {
+        color: #FF69B4;
+      }
+      
+      .metric {
+        text-align: right;
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+      }
+      
+      .bold-metric {
+        font-weight: bold;
+      }
+      
+      .year {
+        color: #666;
+      }
+      
+      .sub-method {
+        padding-left: 24px;
+      }
+
+      .demo-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Helvetica, Arial, sans-serif;
-        background: #0f172a;
-        color: #e5e7eb;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .task-select {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #000;
+        background: white;
+        appearance: none;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 2px 2px 0px 0px #000;
+      }
+      
+      .status-container {
+        flex: 1;
+        border: 2px solid #000;
+        display: flex;
+        overflow: hidden;
+      }
+      
+      .status {
+        flex: 1;
+        padding: 12px;
         text-align: center;
       }
-
-      .container {
-        padding: 2rem;
+      
+      .success {
+        background: #000;
+        color: white;
+      }
+      
+      .fail {
+        background: white;
+        color: black;
+      }
+      
+      .video-area {
+        width: 80%;
+        margin: 0 auto;
+        background: #e0e0e0;
+        border: 2px solid #000;
+        position: relative;
+      }
+      .video-overlay {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
       }
 
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
+      .audio-button {
+        position: relative;
+        overflow: hidden;
       }
 
-      p {
-        font-size: 1.25rem;
-        opacity: 0.85;
+      .audio-progress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
       }
+
+      .audio-progress-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: width 0.1s linear;
+      }
+
+      .audio-controls {
+        display: inline-flex;
+        gap: 8px;
+      }
+      .publication-title {
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+        }
+        .container.is-max-desktop {
+        min-width: 1200px; /* or more */
+        max-width: 1200px; /* or more */
+        }
+
+        video {
+  background: #000;
+}
+
+/* video {
+  filter: invert(1) hue-rotate(180deg);
+} */
+video::-webkit-media-controls-panel {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+video {
+  -webkit-transform: translateZ(0);
+}
+video {
+  transform: scale(1.01);
+}
+
+video {
+  background: #000;
+}
+
+video::-webkit-media-controls-panel {
+  background: black;
+} */
+
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Coming soon! <br>SOLE-R1 model checkpoints, data, video demos, and code will be available here shortly. </h1>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered" style="max-width: 100%;">
+              <h1 class="title is-1 publication-title" style="max-width: 100%;">
+                SOLE-R1: Video-Language Reasoning as the Sole Reward 
+                for On-Robot Reinforcement Learning
+              </h1>
+
+             
+
+
+              <div class="is-size-5 publication-authors" style="font-size: 22px !important;">
+                <span class="author-block">
+                  <a href="https://people.csail.mit.edu/pschro/" target="_blank">Philip Schroeder</a
+                  ><sup>1, 2</sup>&nbsp;&nbsp;&nbsp;</span
+                >
+                <span class="author-block">
+                  <a href="https://thomasweng.com/"  target="_blank">Thomas Weng</a
+                  ><sup>2</sup>&nbsp;&nbsp;&nbsp;</span
+                >
+                <span class="author-block">
+                  <a href="https://sites.google.com/view/karlschmeckpeper?pli=1" target="_blank">Karl Schmeckpeper</a
+                  ><sup>2</sup>&nbsp;&nbsp;&nbsp;</span
+                >
+                <span class="author-block"></span>
+                  <a href="https://eric-rosen.github.io" target="_blank">Eric Rosen</a
+                  ><sup>2</sup>&nbsp;&nbsp;&nbsp;</span
+                >
+                <span class="author-block"></span>
+                  <a href="https://www.linkedin.com/in/stephen-hart-3711666/" target="_blank">Stephen Hart</a
+                  ><sup>2</sup>&nbsp;&nbsp;&nbsp;</span
+                >
+
+                <span class="author-block">
+                  <a href="https://ondrejbiza.com/" target="_blank">Ondrej Biza</a
+                  ><sup>2</sup>&nbsp;&nbsp;&nbsp;</span
+                >
+                <!-- <span class="author-block"></span>
+                  <a href="">Jacky Liang</a
+                  ><sup>1</sup>,</span
+                >
+                <span class="author-block"></span>
+                  <a href="">Zhuo Xu</a
+                  ><sup>1</sup>,</span
+                >
+                <span class="author-block"></span>
+                  <a href="https://kirmani.ai/">Sean Kirmani</a
+                  ><sup>1</sup>,</span
+                >
+                <span class="author-block"></span>
+                  <a href="">Peng Xu</a
+                  ><sup>1</sup>,</span
+                >
+                <span class="author-block">
+                  <a href="https://dannydriess.github.io/">Danny Driess</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block"></span>
+                  <a href="https://tedxiao.me/">Ted Xiao</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block"></span>
+                  <a href="https://jonathantompson.github.io/">Jonathan Tompson</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block"></span>
+                  <a href="https://obastani.github.io/">Osbert Bastani</a
+                  ><sup>2</sup>,
+                </span>
+                <span class="author-block"></span>
+                  <a href="https://www.seas.upenn.edu/~dineshj/">Dinesh Jayaraman</a
+                  ><sup>2</sup>,
+                </span>
+                <span class="author-block"></span>
+                  <a href="#">Wenhao Yu</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block"></span>
+                  <a href="#">Tingnan Zhang</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://dorsa.fyi/">Dorsa Sadigh</a><sup>1,3</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://fxia22.github.io/">Fei Xia</a><sup>1</sup>
+                </span> -->
+              </div>
+              <!-- <div>
+                <sup>†</sup> Work done while interning at Google DeepMind.
+              </div> -->
+
+              <!-- <div class="is-size-5">
+                <em>Accepted at ICLR 2025</em>
+              </div> -->
+
+              <br />
+              <div class="is-size-5 publication-authors">
+                <ul class="affiliation-list">
+                  <li class="affiliation">
+                    <img
+                      src="./static/mit.png"
+                      style="height: 50px; width: auto;"
+                    />
+                    <span class="author-block" style = "font-size: 1.2em;"
+                      ><sup>1</sup>MIT</span
+                    >
+                  </li>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <li class="affiliation">
+                    <img
+                      src="./static/rai_cropped.png"
+                      style="height: 35px; width: auto; margin-right: 10px; margin-top: -5px;"
+                    />
+                    <span class="author-block" style = "font-size: 1.2em;"><sup>2</sup>RAI Institute</span>
+                  </li>
+                  <!-- <li class="affiliation">
+                    <img
+                      src="./static/images/stanford.jpg"
+                      alt="Stanford Logo"
+                      class="logo"
+                    />
+                    <span class="author-block"
+                      ><sup>3</sup>Stanford University</span
+                    >
+                  </li> -->
+                </ul>
+                <br>
+              </div>
+              <br />
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a target="_blank" href="https://philipmit.github.io/sole-r1/icml2026__Copy2_.pdf"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>pdf</span>
+                    </a>
+                </span>
+                 <span class="link-block">
+                    <a target="_blank" href="https://sole-r1.github.io/"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="fab fa-youtube"></i>
+                        </span>
+                        <span>Video Demos</span>
+                    </a>
+                </span>
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/philipmit/sole-r1-model"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code, Models, & Data</span>
+                    </a>
+                  </span>
+                  <!-- <span class="link-block">
+                    <a
+                    href="https://github.com/rover-vlm/a"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-database"></i>
+                      </span>
+                      <span>Data</span>
+                    </a>
+                  </span> -->
+                  <!-- <span class="link-block">
+                    <a
+                    href="https://huggingface.co/your-model"
+                    class="external-link button is-normal is-rounded is-dark"
+                  >
+                    <span class="icon">
+                      <img
+                        src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
+                        alt="Hugging Face"
+                        style="height: 1.2em; vertical-align: middle;"
+                      />
+                    </span>
+                    <span>Data</span>
+                  </a>
+                  </span> -->
+                  <!-- <span class="link-block">
+                    <a
+                      href="#online-demo"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-robot"></i>
+                      </span>
+                      <span>Online Demo</span>
+                    </a>
+                  </span> -->
+                  <!-- <span class="link-block">
+                    <div class="audio-controls">
+                      <a
+                        id="audio-button"
+                        class="external-link button is-normal is-rounded is-dark audio-button"
+                      >
+                        <div class="audio-progress">
+                          <div class="audio-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="icon">
+                          <i class="fas fa-headphones"></i>
+                        </span>
+                        <span>Listen to this paper</span>
+                      </a>
+                      <a
+                        id="audio-play-button" 
+                        class="external-link button is-normal is-rounded is-dark"
+                        style="display: none;"
+                      >
+                        <span class="icon">
+                          <i class="fas fa-play"></i>
+                          <i class="fas fa-pause" style="display: none;"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div> 
+
+
     </div>
+
+
+
+
+
+
+    <section id="json-frame-viewer" class="container">
+        <!-- <h2 class="title is-3 has-text-centered">Interactive Visualization of ROVER Reasoning</h2> -->
+        <!-- <p class="has-text-centered">Select below to see ROVER versus <a href="https://generative-value-learning.github.io/" target="_blank">GVL</a> Zero-Shot progress prediction and frame-level reasoning on videos from succcessful and unsuccessful trajectories across single-stage and multi-stage tasks.  -->
+            <!-- For the tasks from simulation, the videos are separated into levels based on the amount of the task completed during the video. The amount of non-expert behavior in the video increases as the level decreases. The highest-level trajectories for each task show full task completion with near-expert behavior. The level 1 trajectories do not achieve any part of the task. -->
+          <!-- The task progress values generated by ROVER and GVL are shown in yellow and blue, respectively. The ground-truth progress values are shown in gray.  -->
+            <!-- Explore task completion predictions and frame-by-frame reasoning across diverse robotic manipulation tasks. -->
+        <!-- </p> -->
+
+        <!-- <h3>Example videos showing ROVER frame-level reasoning and task progress prediction.</h3>
+        <h4 style="font-weight: normal">The baseline method is the best existing in-context learning framework for video reasoning in embodied settings, <a href="https://generative-value-learning.github.io" target="_blank">GVL (https://generative-value-learning.github.io)</a>.</h4>
+        <h4 style="font-weight: normal">There are a total of 142 example videos across 27 tasks. The videos are separated into levels based on the amount of the task completed during the video. The amount of non-expert behavior in the video increases as the level decreases. The highest-level trajectories for each task show full task completion with near-expert behavior. The level 1 trajectories do not achieve any part of the task.
+          The task progress values generated by ROVER and GVL are shown in yellow and blue, respectively. The ground-truth progress values are shown in gray. 
+          <br><br>
+          The performance metrics for the task progress prediction include the Pearson correlation coefficient (higher is better) and the L2 distance (lower is better) between the ground-truth progress values and the progress values generated by each method (ROVER vs GVL). These metrics are shown as "Corr." and "Dist." on the right in each video.
+        </h4> -->
+        <br>
+        <!-- <label for="task-select" style="font-size: 1em;">Select task/dataset:</label> -->
+          <!-- <select id="task-select" style="font-size: 1em;" onchange="updateLevelOptions(); filterVideos();"> -->
+  
+          <!-- <option value="All">All</option> -->
+          <!-- <option value="PnPCounterToCab">PnPCounterToCab</option> -->
+          <!-- <option value="PnPCounterToMicrowave">PnPCounterToMicrowave</option> -->
+          <!-- <option value="PnPCounterToSink">PnPCounterToSink</option> -->
+        <!-- </select> -->
+  
+        <!-- <label for="lev-select" style="font-size: 1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select trajectory level:</label> -->
+        <!-- <select id="lev-select"  style="font-size: 1em;" onchange="filterVideos()"> -->
+          <!-- <option value="lev3">lev3</option> -->
+          <!-- <option value="All">All</option> -->
+          <!-- <option value="lev7">All</option> -->
+        <!-- </select> -->
+
+        <video src="sole_draft7_record.mp4" controls autoplay muted playsinline></video>
+        <br><br>
+  
+        <div id="video-container"></div>
+      </section>
+
+
+
+      <script>
+        const videoDescriptions2 = {};
+        const videoDescriptions = {}
+    const realWorldDatasets = {};
+            const videoFiles = [];
+        const taskList = []
+        const levelsByTask = {}
+    
+        const taskSet = new Set();
+        const levSet = new Set();
+    
+        videoFiles.forEach(file => {
+          const taskMatch = file.match(/(.*?)_demo/);
+          const levMatch = file.match(/lev(\d+)/);
+    
+          if (taskMatch) taskSet.add(taskMatch[1]);
+          if (levMatch) levSet.add(`lev${levMatch[1]}`);
+        });
+    
+        const taskSelect = document.getElementById("task-select");
+        const levSelect = document.getElementById("lev-select");
+    
+    // Clear existing options first
+  taskSelect.innerHTML = "";
+
+  // Add Real-world option at top
+  const realOption = document.createElement("option");
+  realOption.value = "REAL_WORLD";
+  realOption.textContent = "Real-world OXE videos";
+  taskSelect.appendChild(realOption);
+
+  // Add normal tasks
+  taskList.forEach(task => {
+    if (taskSet.has(task)) {
+      const option = document.createElement("option");
+      option.value = task;
+      option.textContent = task;
+      taskSelect.appendChild(option);
+    }
+  });
+    
+    
+    // // Optionally add an "All" option at the top
+    // const allOption = document.createElement("option");
+    // // allOption.value = "All";
+    // // allOption.textContent = "All";
+    // // allOption.value = "PnPCounterToMicrowave";
+    // // allOption.textContent = "PnPCounterToMicrowave";
+    // allOption.value = "PnPCounterToSink";
+    // allOption.textContent = "PnPCounterToSink";
+    // taskSelect.appendChild(allOption);
+    
+    // // Then add the tasks in the specified order, avoiding duplicates
+    // const added = new Set();
+    
+    // taskList.forEach(task => {
+    //   if (taskSet.has(task) && !added.has(task)) {
+    //     const option = document.createElement("option");
+    //     option.value = task;
+    //     option.textContent = task;
+    //     taskSelect.appendChild(option);
+    //     added.add(task);
+    //   }
+    // });
+    
+        [...levSet].sort((a, b) => parseInt(a.replace('lev', '')) - parseInt(b.replace('lev', ''))).forEach(lev => {
+          const option = document.createElement("option");
+          option.value = lev;
+          option.textContent = lev;
+          levSelect.appendChild(option);
+        });
+    
+    
+    //     function filterVideos() {
+    //   const selectedTask = taskSelect.value;
+    // //   const selectedLev = levSelect.value;
+    //   const selectedLev = levSelect.value.split(' ')[0]; // get part before the first space
+    //   const container = document.getElementById("video-container");
+    //   container.innerHTML = "";
+    
+    //   const filtered = videoFiles.filter(file => {
+    //     const taskMatch = file.includes(`${selectedTask}_demo`) || selectedTask === "All";
+    //     const levMatch = file.includes(selectedLev) || selectedLev === "All";
+    //     return taskMatch && levMatch;
+    //   });
+    
+    //   filtered
+    //   .sort((a, b) => {
+    //     const levA = parseInt((a.match(/lev(\d+)/) || [])[1]) || 0;
+    //     const levB = parseInt((b.match(/lev(\d+)/) || [])[1]) || 0;
+    //     return levB - levA; // Sort descending
+    //   })
+    //   .forEach(file => {
+    //     const wrapper = document.createElement("div");
+    
+    //     const description = videoDescriptions[file] || "No description available.";
+    //     const descriptionElement = document.createElement("p");
+    //     let formattedDescription = description.charAt(0).toUpperCase() + description.slice(1);
+    //     if (!formattedDescription.endsWith(".")) {
+    //       formattedDescription += ".";
+    //     }
+    //     descriptionElement.textContent = `Task description: "${formattedDescription}"`;
+    //     descriptionElement.style.fontSize = "1.2em";
+    //     descriptionElement.style.marginTop = "0.2em";
+    //     // descriptionElement.style.marginTop = "0.6em";
+    //     // descriptionElement.style.marginBottom = "-0.9em";
+    
+    //     const levMatch = file.match(/lev(\d+)/);
+    //     const levelText = levMatch ? `Trajectory level: lev${levMatch[1]}` : "Video level: Unknown";
+    //     const levelElement = document.createElement("p");
+    //     levelElement.textContent = levelText;
+    //     levelElement.style.fontSize = "1.2em";
+    //     // levelElement.style.marginBottom = "-0.3em";
+    
+    //     const videoElement = document.createElement("video");
+    //     videoElement.controls = true;
+    //     videoElement.width = 1200;
+    //     const sourceElement = document.createElement("source");
+    //     // sourceElement.src = file;
+    //     sourceElement.src = `final_web4/${file}`
+    //     sourceElement.type = "video/mp4";
+    //     videoElement.appendChild(sourceElement);
+    
+    //     wrapper.appendChild(descriptionElement);
+    //     wrapper.appendChild(levelElement);
+    //     wrapper.appendChild(videoElement);
+    //     container.appendChild(wrapper);
+    //   });
+    // }
+
+    function filterVideos() {
+  const selectedTask = taskSelect.value;
+  const selectedLev = levSelect.value;
+  const container = document.getElementById("video-container");
+  container.innerHTML = "";
+
+  // === REAL WORLD MODE ===
+  if (selectedTask === "REAL_WORLD") {
+    const file = selectedLev; // direct filename mapping
+
+    const wrapper = document.createElement("div");
+
+    const descriptionElement = document.createElement("p");
+    // descriptionElement.textContent = `Dataset: ${file}`;
+    const description2 = videoDescriptions2[file] || "";
+    let formattedDescription2 = description2.charAt(0).toUpperCase() + description2.slice(1);
+    descriptionElement.textContent = `Task description: "${formattedDescription2}"`;
+    descriptionElement.style.fontSize = "1.2em";
+
+    const videoElement = document.createElement("video");
+    videoElement.controls = true;
+    videoElement.width = 1200;
+
+    const sourceElement = document.createElement("source");
+    sourceElement.src = `final_web4/${file}`;
+    sourceElement.type = "video/mp4";
+    videoElement.appendChild(sourceElement);
+
+    wrapper.appendChild(descriptionElement);
+    wrapper.appendChild(videoElement);
+    container.appendChild(wrapper);
+
+    return;
+  }
+
+  // === NORMAL TRAJECTORY MODE ===
+  const levKey = selectedLev.split(" ")[0];
+
+  const filtered = videoFiles.filter(file => {
+    const taskMatch = file.includes(`${selectedTask}_demo`);
+    const levMatch = file.includes(levKey) || levKey === "All";
+    return taskMatch && levMatch;
+  });
+    
+      filtered
+      .sort((a, b) => {
+        const levA = parseInt((a.match(/lev(\d+)/) || [])[1]) || 0;
+        const levB = parseInt((b.match(/lev(\d+)/) || [])[1]) || 0;
+        return levB - levA; // Sort descending
+      })
+      .forEach(file => {
+        const wrapper = document.createElement("div");
+    
+        const description = videoDescriptions[file] || "No description available.";
+        const description2 = videoDescriptions2[file] || "";
+        const descriptionElement = document.createElement("p");
+        let formattedDescription = description.charAt(0).toUpperCase() + description.slice(1);
+        let formattedDescription2 = description2.charAt(0).toUpperCase() + description2.slice(1);
+        if (!formattedDescription.endsWith(".")) {
+          formattedDescription += ".";
+        }
+        if (!formattedDescription2.endsWith(".")) {
+          formattedDescription2 += ".";
+        }
+        descriptionElement.textContent = `Task description: "${formattedDescription}"`;
+        descriptionElement.style.fontSize = "1.2em";
+        descriptionElement.style.marginTop = "0.2em";
+        // descriptionElement.style.marginTop = "0.6em";
+        // descriptionElement.style.marginBottom = "-0.9em";
+    
+        const levMatch = file.match(/lev(\d+)/);
+        const levelText = levMatch ? `Trajectory level: lev${levMatch[1]}` : "Video level: Unknown";
+        const levelElement = document.createElement("p");
+        levelElement.textContent = levelText;
+        levelElement.style.fontSize = "1.2em";
+        // levelElement.style.marginBottom = "-0.3em";
+    
+        const videoElement = document.createElement("video");
+        videoElement.controls = true;
+        videoElement.width = 1200;
+        const sourceElement = document.createElement("source");
+        // sourceElement.src = file;
+        sourceElement.src = `final_web4/${file}`
+        sourceElement.type = "video/mp4";
+        videoElement.appendChild(sourceElement);
+    
+        wrapper.appendChild(descriptionElement);
+        wrapper.appendChild(levelElement);
+        wrapper.appendChild(videoElement);
+        container.appendChild(wrapper);
+      });
+    }
+    
+    
+//     function updateLevelOptions() {
+//   const selectedTask = taskSelect.value;
+//   const levels = levelsByTask[selectedTask] || [];
+
+//   // Clear existing level options
+//   levSelect.innerHTML = '';
+
+//   // Add "All" option
+//   const allOption = document.createElement("option");
+//   allOption.value = "All";
+//   allOption.textContent = "All";
+//   levSelect.appendChild(allOption);
+
+//   // Add task-specific levels
+//   levels.forEach(lev => {
+//     const option = document.createElement("option");
+//     option.value = lev;
+//     option.textContent = lev;
+//     levSelect.appendChild(option);
+//   });
+
+//   // Select the maximum level by default (last one in the array)
+//   if (levels.length > 0) {
+//     levSelect.value = levels[levels.length - 1];
+//   }
+// }
+
+function updateLevelOptions() {
+  const selectedTask = taskSelect.value;
+
+  // Reference to the label
+  const levLabel = document.querySelector('label[for="lev-select"]');
+
+  levSelect.innerHTML = "";
+
+  // === REAL WORLD MODE ===
+  if (selectedTask === "REAL_WORLD") {
+    levLabel.textContent = "Select dataset:";
+
+    Object.entries(realWorldDatasets).forEach(([key, filename]) => {
+      const option = document.createElement("option");
+      option.value = filename;
+      option.textContent = key;
+      levSelect.appendChild(option);
+    });
+
+    return;
+  }
+
+  // === NORMAL TRAJECTORY MODE ===
+  levLabel.textContent = "Select trajectory level:";
+
+  const levels = levelsByTask[selectedTask] || [];
+
+  const allOption = document.createElement("option");
+  allOption.value = "All";
+  allOption.textContent = "All";
+  levSelect.appendChild(allOption);
+
+  levels.forEach(lev => {
+    const option = document.createElement("option");
+    option.value = lev;
+    option.textContent = lev;
+    levSelect.appendChild(option);
+  });
+
+  if (levels.length > 0) {
+    levSelect.value = levels[levels.length - 1];
+  }
+}
+
+    window.onload = () => {
+      updateLevelOptions();
+      filterVideos();
+    };
+    
+    
+    function checkKeyword() {
+      const input = document.getElementById("keyword-input").value.trim();
+    
+      const encodedInput = btoa(input);
+    
+      const allowedEncoded = ["R2l2ZW4=", "Z2l2ZW4="]; 
+    
+      if (allowedEncoded.includes(encodedInput)) {
+        document.getElementById("access-gate").style.display = "none";
+        document.querySelector("main").style.display = "block";
+      } else {
+        document.getElementById("error-msg").textContent = "Incorrect keyword. Please try again.";
+      }
+    }
+    
+      </script>
+
+
+
+    <section id="json-frame-viewer" class="container">
+    <!-- <h2 class="title is-3 has-text-centered">Interactive Illustration</h2> -->
+    <!-- <p class="has-text-centered">ROVER versus <a href="https://generative-value-learning.github.io/" target="_blank">GVL</a> Zero-Shot progress prediction results on video trajectories from succcessful and unsuccessful trajectories across 27 single-stage and multi-stage tasks.  -->
+      <!-- Explore task completion predictions and frame-by-frame reasoning across diverse robotic manipulation tasks.</p> -->
+    <head>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            #json-frame-viewer {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                /* background-color: #f5f5f5; */
+                background-color: white;
+                border-radius: 8px;
+                /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+            }
+            #json-frame-viewer .upload-container {
+                text-align: center;
+                padding: 20px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin-bottom: 20px;
+            }
+            #json-frame-viewer .viewer-container {
+                display: none;
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            #json-frame-viewer .frame-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+            @media (min-width: 768px) {
+                #json-frame-viewer .frame-container {
+                    flex-direction: row;
+                }
+            }
+            #json-frame-viewer .frame-navigation {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+                width: 100%;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #json-frame-viewer .frame-info {
+                flex: 1;
+            }
+            #json-frame-viewer .frame-image {
+                flex: 2;
+                text-align: center;
+            }
+            #json-frame-viewer .frame-image img {
+                max-width: 100%;
+                max-height: 500px;
+            }
+            #json-frame-viewer .plot-container {
+                flex: 1;
+                min-height: 400px;
+            }
+            #json-frame-viewer button {
+                padding: 8px 16px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            #json-frame-viewer button:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+            #json-frame-viewer button:hover:not(:disabled) {
+                background-color: #0056b3;
+            }
+            #json-frame-viewer .error {
+                color: red;
+                padding: 10px;
+                display: none;
+            }
+            #json-frame-viewer .frame-slider {
+                flex-grow: 1;
+                margin: 0 10px;
+            }
+            #json-frame-viewer input[type="range"] {
+                width: 100%;
+            }
+            #json-frame-viewer #json-frame-counter {
+                min-width: 100px;
+                text-align: center;
+            }
+            #json-frame-viewer select {
+                padding: 8px;
+                font-size: 16px;
+                /* width: 80%; */
+                /* max-width: 800px; */
+                width:40%;
+                max-width: 300px;
+                margin: 10px 0;
+            }
+            #json-frame-viewer .variant-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+
+    
+        <div id="json-frame-viewer-container" class="viewer-container">
+            <div class="frame-navigation">
+                <span id="json-frame-counter"></span>
+                <div class="frame-slider">
+                    <input type="range" id="json-frame-slider" min="0" max="0" value="0">
+                </div>
+                <button id="json-frame-playButton">Play</button>
+            </div>
+    
+            <div class="frame-container">
+                <div class="frame-info">
+                    <p style="display: none;"><strong>Frame ID:</strong> <span id="json-frame-id"></span></p>
+                    <p style="display: none;"><strong>Number:</strong> <span id="json-frame-number"></span></p>
+                    <p style="display: none;"><strong>Order:</strong> <span id="json-frame-order"></span></p>
+                    <p style="height: 3em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; cursor: pointer; transition: background-color 0.2s;" onmouseover="this.style.height='auto'; this.style.overflow='visible'; this.style['-webkit-line-clamp']='none'; this.style.backgroundColor='#f0f0f0';" onmouseout="this.style.height='3em'; this.style.overflow='hidden'; this.style['-webkit-line-clamp']='2'; this.style.backgroundColor='transparent';"><strong>Description:</strong> <span id="json-frame-description"></span></p>
+                    <div class="frame-image">
+                        <img id="json-frame-image" alt="Frame">
+                    </div>
+                </div>
+                <div id="json-frame-plotContainer" class="plot-container"></div>
+            </div>
+        </div>
+
+  <script>
+  function isSafari() {
+    const ua = navigator.userAgent;
+    return /^((?!chrome|android).)*safari/i.test(ua);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const img = document.getElementById("method-visual");
+    if (!img) return;
+
+    if (isSafari()) {
+      img.src = "./static/fig1_final.png";
+    } else {
+      img.src = "./static/rover_gif3_v3.gif";
+    }
+  });
+</script>
+    </body>
+  </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              Vision-language models (VLMs) have shown impressive capabilities across diverse tasks, motivating efforts to leverage these models to supervise robot learning. However, when used as evaluators in reinforcement learning (RL), today’s strongest models often fail under partial observability and distribution shift, enabling policies to exploit perceptual errors rather than solve the task. We introduce SOLE-R1 (Self-Observing LEarner), a video-language reasoning model explicitly designed to serve as the sole reward signal for online RL. Given only raw video observations and a natural-language goal, SOLE-R1 performs per-timestep spatiotemporal chain-of-thought (CoT) reasoning and produces dense estimates of task progress that can be used directly as rewards. To train SOLE-R1, we develop a large-scale video trajectory and reasoning synthesis pipeline that generates temporally grounded CoT traces aligned with continuous progress supervision. 
+              This data is combined with foundational spatial and multi-frame temporal reasoning, and used to train the model with a hybrid framework that couples supervised fine-tuning with RL from verifiable rewards. Across four different simulation environments and a real-robot setting, SOLE-R1 enables zero-shot online RL from random initialization: robots learn previously unseen manipulation tasks without ground-truth rewards, success indicators, demonstrations, or task-specific tuning. SOLE-R1 succeeds on 24 unseen tasks and substantially outperforms strong vision-language rewarders, including GPT-5 and Gemini-3-Pro, while exhibiting markedly greater robustness to reward hacking.
+
+              All video demos available at the <a href="https://sole-r1.github.io/" target="_blank">https://sole-r1.github.io/</a>.
+
+              <!--/ Abstract. -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width has-text-justified">
+            <h2 class="title is-3 has-text-centered">Model Overview</h2>
+
+            <h3 class="title is-4">SOLE-R1 (Self-Observing LEarner) </h3>
+            <div class="content has-text-justified">
+              <p>
+                We design SOLE-R1 to perform video-native temporal reasoning for goal-conditioned tasks. Given a natural-language goal and a video stream of observations, the model produces (i) a per-timestep CoT explanation describing what has changed since the last timestep and what remains to be done, and (ii) a dense scalar progress estimate used as a reward signal for online RL.
+
+              </p>
+            </div>
+
+            <div class="content has-text-centered">
+                <!-- <img src="./static/rover_gif3_v2.gif"  /> -->
+                <!-- <img src="./static/rover_gif3_v3.gif"  /> -->
+                 <!-- <img id="method-visual" src="./static/rover_gif3_v3.gif" /> -->
+            <img
+                src="./paper_figs/fig1_v3.png"
+                class="inline-figure-six"
+              />
+                <!-- <video
+                class="inline-figure-six"
+                autoplay
+                loop
+                muted
+                >
+                <source src="./static/videos/concept.mp4" type="video/mp4">
+              </video> -->
+            </div>
+
+          <p>SOLE-R1 produces (i) multi-frame CoT explanations grounded in visual evidence and (ii) a dense progress signal suitable for online RL. 
+            To elicit robust reasoning, we build the training data in two stages: (1) foundational reasoning over space (single-image + depth) and time (multi-image/video), and (2) robot-video spatiotemporal reasoning specialized for dense progress estimation.
+            <br><br>
+          We generate over one million CoT reasoning examples from more than 40,000 real-world and simulated videos.
+          We also carefully curate a diverse collection of general spatial and multi-frame temporal reasoning data to serve as a foundational layer of our training mixture. 
+          Together, this training induces video-native reasoning that explicitly integrates both spatial and temporal structure (Figure 2).
+          </p>
+
+            <div class="content has-text-centered">
+              <img
+                  src="./paper_figs/fig2_v2.png"
+                  class="inline-figure-six"
+                />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="section" style="margin-top:-40px">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width has-text-justified">
+            <h2 class="title is-3 has-text-centered">Experiments</h2>
+
+            <div class="content has-text-justified" >
+              <p>
+
+We evaluate whether SOLE-R1 can serve as the sole supervision signal for learning manipulation skills from scratch via online RL. 
+We run experiments across four simulation benchmark suites (RoboSuite, ManiSkill, Meta-World, and LIBERO) and in a real-world tabletop manipulation setting with a Franka arm. 
+Across all settings, we evaluate a total of 41 tasks, spanning pick-and-place, articulation, button/lever/knob interactions, and mobile manipulation. 
+All hyperparameters and details are provided in Appendix G. All video demos available at the <a href="https://sole-r1.github.io/" target="_blank">https://sole-r1.github.io/</a>.
+<br><br>
+We use a SERL implementation of DrQv2 as the learning algorithm. The policy observes two RGB streams (a wrist camera and an external/shoulder camera) along with robot proprioception. 
+Actions are end-effector delta motions and a gripper open/close command. 
+We do not use any additional privileged state, depth, object poses, or task-specific sensors.
+<br><br>
+Unlike prior work that (i) learns from ground-truth rewards and/or (ii) tunes reward models or policies on task demonstrations, we evaluate in a fully zero-shot online RL setting:
+<ul style="display: inline-block; text-align: left; margin: 0 40px;">
+<li>No ground-truth rewards. The policy never observes ground-truth/external rewards (dense or sparse) and receives no success labels during training.</li>
+<li>No demonstrations or offline trajectories. The policy starts with random actions and learns only from on-policy interaction.</li>
+<li>No task-specific tuning or calibration. Reward models are used as-is, with fixed prompting across tasks.</li>
+</ul>
+
+   
+                <!-- <br><br>
+                <p>
+                    We also test ROVER on previous benchmarks based on diverse real-world OpenX Embodiment videos.
+                </p> -->
+
+                <!-- Through extensive benchmark, we found our proposed framework can
+                significantly enhance the ability of visual language models in
+                performing different types of spatial reasoning like humans, as
+                well as unlocking novel downstream applications such as
+                robotics. -->
+              </p>
+            </div>
+            <br>
+            <div class="content has-text-centered">
+              <img
+                src="./paper_figs/icml_figures_all_tasks_hor.png"
+                class="inline-figure-six"
+              />
+            </div>
+            <h3 class="title is-4">1) SOLE-R1 enables zero-shot online RL from scratch</h3>
+            <p>
+                <!-- ROVER shows higher correlation with ground-truth task progress estimates. -->
+                SOLE-R1 achieves at least 50% success on 24 tasks, substantially outperforming all baselines (Figure 3). The strongest baselines include GPT-5 and Gemini, but they reach 50% success on only 7 and 5 tasks, respectively. The non-reasoning models achieve near-zero success on most tasks, with the exception of ReWiND in Meta-World, where it achieves higher success since it is trained on hundreds of Meta-World demonstrations
+
+                <br><br>
+                <b>SOLE-R1 generalizes to unseen tasks and environments.</b>
+SOLE-R1 succeeds with tasks that significantly differ from the task types seen during training, such as sliding a puck into a net, opening and closing windows, and manipulating unseen levers and handles in novel ways based on the natural language task specification. 
+This suggests that SOLE-R1 does not merely memorize task templates, but instead learns reusable spatiotemporal progress primitives (e.g., establishing contact, aligning a grasp, changing articulation state, placing/settling objects) that transfer to unseen tasks.
+
+<br><br>
+<b>SOLE-R1 generalizes to unseen embodiments and camera viewpoints.</b>
+SOLE-R1 solves tasks with the Franka, along with embodiments not seen during training, including the Sawyer robot in Meta-World, the WidowX AI and Fetch Mobile Manipulator in ManiSkill, and the modified Franka with different gripper fingers and wrist camera angle in real-world. 
+We also see SOLE-R1 solve tasks with camera views that were not used during training. This indicates that SOLE-R1 reward predictions are not narrowly tied to a particular kinematic chain or gripper appearance, but instead track goal-relevant object state changes across morphology and camera placement.
+              </p>
+            <div class="content has-text-justified">
+
+            </div>
+            <div class="content has-text-centered">
+              <img
+                src="./paper_figs/res_fig1.png"
+                class="inline-figure-six"
+              />
+            </div>
+            <br>
+
+            <h3 class="title is-4">2) SOLE-R1 is robust to the exploitation observed with GPT-5 and Gemini-3-Pro</h3>
+
+            <div class="content has-text-justified">
+             <p>
+We analyze failures at two levels: (i) task-level reward pathologies (is the reward exploitable, miscalibrated, or too weak to drive learning?) and (ii) frame-level reasoning errors (what perceptual/temporal evidence is missed when progress is incorrect).
+<br><br>
+We use the perceived-vs-true success plot (Figure 4) to separate failures into two types: reward-hacking (high perceived, low true) versus signal-limited (low perceived, low true).
+General-purpose VLM rewarders (GPT-5 and Gemini) predominantly fail via reward hacking: online RL discovers behaviors that elicit inflated progress predictions without completing the task. 
+We show an example of reward hacking with picking up the cube in Figure 4 and an extended set of examples in Figure ??. SOLE-R1 failures more often fall into the signal-limited failure type, suggesting the model typically recognizes non-success but can still provide rewards that are too flat/noisy to bootstrap exploration within the episode budget (as shown in the correlation analyses
+between predicted and true rewards in Appendix C).
+<br><br>
+Qualitative review of rollouts highlights three recurring SOLE-R1 error modes: (1) temporal under-detection of brief events (contact, latch release, button actuation, insertion “click”), especially when they occur between reward-query steps or under occlusion; (2) ambiguous object state
+in clutter/partial views (uncertain grasp, insertion, or seating), where conservative progress reduces hacking but weakens stepping-stone reinforcement; and (3) occasional goal-consistent appearance shortcuts (e.g., proximity/alignment scored as partial progress without completion), typically saturating at moderate progress instead of full completion.
+
+            </p>
+            </div>
+            <div class="content has-text-centered">
+              <img
+              src="./paper_figs/res_fig2.png"
+              class="inline-figure-six"
+              />
+            </div>
+            <br>
+            <h3 class="title is-4">3) SOLE-R1 model and training recipe follows a scaling law driven by diversity of training tasks</h3>
+
+            <div class="content has-text-justified">
+              <p>
+We find that our data synthesis and training recipe follows a scaling law driven by the diversity of training tasks (Figure 6). We train variants of SOLE-R1 with an increasing number of task types included in our training data synthesis (details in Appendix M). The figure below plots the number of downstream tasks that achieve different success thresholds as a function of training task diversity.
+</p>
+            </div>
+            <div class="content has-text-centered">
+                
+              <img
+                src="./paper_figs/tasks_above_threshold_vs_training_types.png"
+                class="inline-figure-six"
+                style="max-width: 500px; width: 100%; height: auto;"
+                />
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+
+    <!-- <div class="hr"></div>
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title has-text-centered">BibTeX</h2>
+        <pre style="width: 100%;"><code>@inproceedings{schroeder2025rover,
+    author    = {Schroeder, Philip and Biza, Ondrej and Weng, Thomas and Luo, Hongyin and Glass, James},
+    title     = {ROVER: Recursive Reasoning Over Videos with Vision-Language Models for Embodied Tasks},
+    booktitle = {39th Conference on Neural Information Processing Systems},
+    year      = {2025}
+}</code></pre>
+        <div class="has-text-left mt-2">
+          <button class="button is-small is-light" onclick="navigator.clipboard.writeText(document.querySelector('#BibTeX pre code').textContent)">
+            <span class="icon is-small">
+              <i class="fas fa-copy"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- <footer class="footer">
+      <div class="container is-max-desktop">
+        <div class="content has-text-centered">
+          <p>
+            <span>©</span> Google DeepMind 2024
+          </p>
+        </div>
+      </div>
+    </footer> -->
   </body>
 </html>
