@@ -1,5 +1,7 @@
 
- 
+
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,8 +19,11 @@
       content="https://generative-value-learning.github.io/static/images/icv/method.png"
     /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
+    <!-- <title>
       SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot RL
+    </title> -->
+   <title>
+      SOLE-R1
     </title>
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -57,6 +62,45 @@
         font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
       
+    .video-demo-frame-wrapper {
+      width: 100%;
+      /* height: 900px; */
+      max-height: 1200px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: white;
+
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+      .video-demo-frame {
+        width: 100%;
+        height: 650px;       /* default height */
+        max-height: 1200px;  /* fixed max height */
+        border: white 2px solid;
+        margin: 0px 0px 0px 10px;
+        /* padding: 0px 30px; */
+        /* margin: 0px 30px; */
+        display: block;
+        /* margin: 0 auto; */
+        /* margin: 0 0 30px 0; */
+        /* overflow: hidden; */
+      }
+      .video-demo-frame2 {
+        width: 100%;
+        height: 590px;       /* default height */
+        max-height: 1200px;  /* fixed max height */
+        border: white 2px solid;
+        margin: 0px 0px 0px 10px;
+        /* padding: 0px 30px; */
+        /* margin: 0px 30px; */
+        display: block;
+        /* margin: 0 auto; */
+        /* margin: 0 0 30px 0; */
+        /* overflow: hidden; */
+      }
       table {
         width: 100%;
         border-collapse: collapse;
@@ -244,6 +288,9 @@ video::-webkit-media-controls-panel {
   background: black;
 } */
 
+
+
+
     </style>
   </head>
   <body>
@@ -252,9 +299,13 @@ video::-webkit-media-controls-panel {
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered" style="max-width: 100%;">
-              <h1 class="title is-1 publication-title" style="max-width: 100%;">
+              <!-- <h1 class="title is-1 publication-title" style="max-width: 100%;">
                 SOLE-R1: Video-Language Reasoning as the Sole Reward 
                 for On-Robot Reinforcement Learning
+              </h1> -->
+              <h1 class="title is-1 publication-title" style="max-width: 100%; font-size: 40px;">
+              SOLE-R1: Video-Language Reasoning as the <br>
+              Sole Reward for On-Robot RL
               </h1>
 
              
@@ -387,18 +438,9 @@ video::-webkit-media-controls-panel {
                         <span class="icon">
                             <i class="ai ai-arxiv"></i>
                         </span>
-                        <span>arXiv</span>
+                        <span>Paper</span>
                     </a>
                 </span>
-                 <!-- <span class="link-block">
-                    <a target="_blank" href="https://sole-r1.github.io/"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                            <i class="fab fa-youtube"></i>
-                        </span>
-                        <span>Video Demos</span>
-                    </a>
-                </span> -->
                   <span class="link-block">
                     <a
                       href="https://github.com/philipmit/sole-r1-model"
@@ -408,21 +450,43 @@ video::-webkit-media-controls-panel {
                       <span class="icon">
                         <i class="fab fa-github"></i>
                       </span>
-                      <span>Code, Models, & Data</span>
+                      <span>Code</span>
                     </a>
                   </span>
-                  <!-- <span class="link-block">
+                  <span class="link-block">
                     <a
-                    href="https://github.com/rover-vlm/a"
+                    href="https://huggingface.co/pschro/SOLE-R1-8B"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                         <i class="fas fa-cube"></i>
+                      </span>
+                      <span>Models</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a
+                    href=""
                       target="_blank"
                       class="external-link button is-normal is-rounded is-dark"
                     >
                       <span class="icon">
                         <i class="fas fa-database"></i>
                       </span>
+                      <!-- <span>Data (coming soon!)</span> -->
                       <span>Data</span>
                     </a>
-                  </span> -->
+                  </span>
+                 <!-- <span class="link-block">
+                    <a target="_blank" href="https://sole-r1.github.io/"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="fab fa-youtube"></i>
+                        </span>
+                        <span>Video Demos</span>
+                    </a>
+                </span> -->
                   <!-- <span class="link-block">
                     <a
                     href="https://huggingface.co/your-model"
@@ -526,7 +590,7 @@ video::-webkit-media-controls-panel {
 
         <!-- <video src="sole_draft7_v3_record.mp4" controls autoplay muted playsinline></video> -->
          <!-- <img src="sole_draft5_clip.gif" class="center-align" alt="Animation" > -->
-          <iframe 
+          <!-- <iframe 
   width="93.8%" 
   height="315"
   src="https://www.youtube.com/embed/-ig-p_uUi8Q?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0"
@@ -534,8 +598,32 @@ video::-webkit-media-controls-panel {
   allow="autoplay; encrypted-media"
   allowfullscreen
   style="display: block; margin: 0 0 0 50px;">
+</iframe> -->
+  <h2 class="title is-3 has-text-centered" style="font-size: 25px; margin: 0 0 8px 0;">Overview Video</h2>
+  <iframe 
+  width="93.8%" 
+  height="315"
+  src="https://www.youtube.com/embed/xGWOuck881Y?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen
+  style="display: block; margin: 0 0 0 50px;">
 </iframe>
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/-ig-p_uUi8Q?si=xGvs4ZbIkPbVgUjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/xGWOuck881Y?si=OXgS6OER3zm3UcEG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
         <br><br>
+
+    <section class="section" id="video-demos">
+        <div class="container is-max-desktop">
+            <div class="video-demo-frame-wrapper">
+            <iframe
+              src="./index_roboreason_view.html"
+              class="video-demo-frame"
+              loading="lazy"
+            ></iframe>
+            </div>
+        </div>
+    </section>
   
         <div id="video-container"></div>
       </section>
@@ -976,6 +1064,14 @@ function updateLevelOptions() {
                 gap: 10px;
                 margin: 10px 0;
             }
+          .extra-bold {
+            /* font-weight: 1900 !important; */
+            /* text-shadow: 0 0 0 currentColor; */
+            font-family: "Arial Black", Impact, sans-serif;
+            font-weight: 500;
+            font-size: 1.08em;
+            letter-spacing: 0.02em;
+          }
         </style>
     </head>
     <body>
@@ -1031,8 +1127,28 @@ function updateLevelOptions() {
           <div class="column is-four-fifths">
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
-              Vision-language models (VLMs) have shown impressive capabilities across diverse tasks, motivating efforts to leverage these models to supervise robot learning. However, when used as evaluators in reinforcement learning (RL), today’s strongest models often fail under partial observability and distribution shift, enabling policies to exploit perceptual errors rather than solve the task. We introduce SOLE-R1 (Self-Observing LEarner), a video-language reasoning model explicitly designed to serve as the sole reward signal for online RL. Given only raw video observations and a natural-language goal, SOLE-R1 performs per-timestep spatiotemporal chain-of-thought (CoT) reasoning and produces dense estimates of task progress that can be used directly as rewards. To train SOLE-R1, we develop a large-scale video trajectory and reasoning synthesis pipeline that generates temporally grounded CoT traces aligned with continuous progress supervision. 
-              This data is combined with foundational spatial and multi-frame temporal reasoning, and used to train the model with a hybrid framework that couples supervised fine-tuning with RL from verifiable rewards. Across four different simulation environments and a real-robot setting, SOLE-R1 enables zero-shot online RL from random initialization: robots learn previously unseen manipulation tasks without ground-truth rewards, success indicators, demonstrations, or task-specific tuning. SOLE-R1 succeeds on 24 unseen tasks and substantially outperforms strong vision-language rewarders, including GPT-5 and Gemini-3-Pro, while exhibiting markedly greater robustness to reward hacking.
+Vision-language models (VLMs) have shown impressive capabilities across diverse tasks, motivating efforts to leverage these models to supervise robot learning. 
+However, when used as evaluators in reinforcement learning (RL), today’s strongest models often fail under partial observability and distribution shift, enabling policies to exploit perceptual errors rather than solve the task. 
+To address this limitation, we introduce SOLE-R1 (<b>S</b>elf-<b>O</b>bserving <b>LE</b>arner), a video-language reasoning model
+explicitly designed to serve as the sole reward signal for online RL. Given only raw
+video observations and a natural-language goal, SOLE-R1 performs per-timestep
+spatiotemporal chain-of-thought (CoT) reasoning and produces dense estimates of
+task progress that can be used directly as rewards. To train SOLE-R1, we develop a
+large-scale video trajectory and reasoning synthesis pipeline that generates tempo-
+rally grounded CoT traces aligned with continuous progress supervision. This data
+is combined with foundational spatial and multi-frame temporal reasoning, and
+used to train the model with a hybrid framework that couples supervised fine-tuning
+with RL from verifiable rewards. Across four different simulation environments
+and a real-robot setting, SOLE-R1 enables zero-shot online RL from random ini-
+tialization: robots learn previously unseen manipulation tasks without ground-truth
+rewards, success indicators, demonstrations, or task-specific tuning. SOLE-R1
+succeeds on 24 unseen tasks and substantially outperforms strong vision-language
+rewarders, including GPT-5 and Gemini-3-Pro, while exhibiting markedly greater
+robustness to reward hacking. We will release all models, data, code, and demos at
+the links above.
+
+              <!-- Vision-language models (VLMs) have shown impressive capabilities across diverse tasks, motivating efforts to leverage these models to supervise robot learning. However, when used as evaluators in reinforcement learning (RL), today’s strongest models often fail under partial observability and distribution shift, enabling policies to exploit perceptual errors rather than solve the task. We introduce SOLE-R1 (Self-Observing LEarner), a video-language reasoning model explicitly designed to serve as the sole reward signal for online RL. Given only raw video observations and a natural-language goal, SOLE-R1 performs per-timestep spatiotemporal chain-of-thought (CoT) reasoning and produces dense estimates of task progress that can be used directly as rewards. To train SOLE-R1, we develop a large-scale video trajectory and reasoning synthesis pipeline that generates temporally grounded CoT traces aligned with continuous progress supervision.  -->
+              <!-- This data is combined with foundational spatial and multi-frame temporal reasoning, and used to train the model with a hybrid framework that couples supervised fine-tuning with RL from verifiable rewards. Across four different simulation environments and a real-robot setting, SOLE-R1 enables zero-shot online RL from random initialization: robots learn previously unseen manipulation tasks without ground-truth rewards, success indicators, demonstrations, or task-specific tuning. SOLE-R1 succeeds on 24 unseen tasks and substantially outperforms strong vision-language rewarders, including GPT-5 and Gemini-3-Pro, while exhibiting markedly greater robustness to reward hacking. -->
 
               <!-- All video demos available at the <a href="https://sole-r1.github.io/" target="_blank">https://sole-r1.github.io/</a>. -->
 
@@ -1049,12 +1165,18 @@ function updateLevelOptions() {
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width has-text-justified">
-            <h2 class="title is-3 has-text-centered">Model Overview</h2>
+            <h2 class="title is-3 has-text-centered">Model & Training Overview</h2>
 
-            <h3 class="title is-4">SOLE-R1 (Self-Observing LEarner) </h3>
+            <!-- <h3 class="title is-4">
+              SOLE-R1 (
+              <span class="extra-bold">S</span>elf-
+              <span class="extra-bold">O</span>bserving
+              <span class="extra-bold">LE</span>arner)
+            </h3> -->
             <div class="content has-text-justified">
               <p>
-                We design SOLE-R1 to perform video-native temporal reasoning for goal-conditioned tasks. Given a natural-language goal and a video stream of observations, the model produces (i) a per-timestep CoT explanation describing what has changed since the last timestep and what remains to be done, and (ii) a dense scalar progress estimate used as a reward signal for online RL.
+                <!-- We design SOLE-R1 to perform video-native temporal reasoning for goal-conditioned tasks.  -->
+                <b>Model:</b> Given a natural-language goal and a video stream of observations, SOLE-R1 produces (i) per-timestep chain-of-thought (CoT) describing what has changed since the last timestep and (ii) a dense scalar progress estimate used as a reward signal for online RL (Figure 1).
 
               </p>
             </div>
@@ -1067,6 +1189,9 @@ function updateLevelOptions() {
                 src="./paper_figs/fig1_v3.png"
                 class="inline-figure-six"
               />
+            <figcaption>
+              Figure 1: SOLE-R1 is a video-language reasoning model designed to guide online RL with per-timestep CoT reasoning and progress prediction. In large-scale experiments across 40 tasks, SOLE-R1 outperforms strong baseline models with zero-shot online RL.
+            </figcaption>
                 <!-- <video
                 class="inline-figure-six"
                 autoplay
@@ -1077,19 +1202,30 @@ function updateLevelOptions() {
               </video> -->
             </div>
 
-          <p>SOLE-R1 produces (i) multi-frame CoT explanations grounded in visual evidence and (ii) a dense progress signal suitable for online RL. 
-            To elicit robust reasoning, we build the training data in two stages: (1) foundational reasoning over space (single-image + depth) and time (multi-image/video), and (2) robot-video spatiotemporal reasoning specialized for dense progress estimation.
-            <br><br>
+          <p>
+            <!-- SOLE-R1 produces (i) multi-frame CoT explanations grounded in visual evidence and (ii) a dense progress signal suitable for online RL.  -->
+            <!-- <br><br> -->
+          <!-- To elicit robust reasoning,  -->
+          <b>Training data:</b> We build the training data (Figure 2) in two stages: (1) foundational reasoning over space (single-image + depth) and time (multi-image/video), and (2) robot-video spatiotemporal reasoning specialized for dense progress estimation.
           We generate over one million CoT reasoning examples from more than 40,000 real-world and simulated videos.
           We also carefully curate a diverse collection of general spatial and multi-frame temporal reasoning data to serve as a foundational layer of our training mixture. 
-          Together, this training induces video-native reasoning that explicitly integrates both spatial and temporal structure (Figure 2).
+          Together, this training induces video-native reasoning that explicitly integrates both spatial and temporal structure.
           </p>
-
+          <br>
+          <p>
+          <b>Training procedure:</b> To train SOLE-R1, we use a two-stage hybrid recipe: SFT teaches high-quality spatiotemporal CoT reasoning, while RLVR (GRPO) directly emphasizes accurate progress prediction, 
+          which is under-emphasized during SFT (since the final answer occupies only a small fraction of response tokens). 
+          </p>
+        
             <div class="content has-text-centered">
+              <br><br>
               <img
                   src="./paper_figs/fig2_v2.png"
                   class="inline-figure-six"
                 />
+              <figcaption>
+            Figure 2: SOLE-R1 training data mixture. The dataset combines foundational spatial reasoning, multi-frame temporal reasoning, and our synthesized video trajectories with chain-of-thought explanations and dense progress supervision, jointly enabling reasoning over space and time for progress prediction.
+              </figcaption> 
             </div>
           </div>
         </div>
@@ -1107,22 +1243,26 @@ function updateLevelOptions() {
             <div class="content has-text-justified" >
               <p>
 
-We evaluate whether SOLE-R1 can serve as the sole supervision signal for learning manipulation skills from scratch via online RL. 
+We evaluate whether SOLE-R1 can serve as the <i>sole</i> supervision signal for learning manipulation skills from scratch via online RL. 
 We run experiments across four simulation benchmark suites (RoboSuite, ManiSkill, Meta-World, and LIBERO) and in a real-world tabletop manipulation setting with a Franka arm. 
-Across all settings, we evaluate a total of 41 tasks, spanning pick-and-place, articulation, button/lever/knob interactions, and mobile manipulation. 
-All hyperparameters and details are provided in Appendix G. All video demos available at the <a href="https://sole-r1.github.io/" target="_blank">https://sole-r1.github.io/</a>.
+Across all settings, we evaluate a total of 40 tasks, spanning pick-and-place, articulation, button/lever/knob interactions, and mobile manipulation. 
+<!-- All hyperparameters and details are provided in Appendix G. All video demos available at the <a href="https://sole-r1.github.io/" target="_blank">https://sole-r1.github.io/</a>. -->
 <br><br>
-We use a SERL implementation of DrQv2 as the learning algorithm. The policy observes two RGB streams (a wrist camera and an external/shoulder camera) along with robot proprioception. 
+<!-- We use a SERL implementation of DrQv2 as the learning algorithm.  -->
+The policy observes two RGB streams (a wrist camera and an external/shoulder camera) along with robot proprioception. 
 Actions are end-effector delta motions and a gripper open/close command. 
 We do not use any additional privileged state, depth, object poses, or task-specific sensors.
 <br><br>
 Unlike prior work that (i) learns from ground-truth rewards and/or (ii) tunes reward models or policies on task demonstrations, we evaluate in a fully zero-shot online RL setting:
 <ul style="display: inline-block; text-align: left; margin: 0 40px;">
-<li>No ground-truth rewards. The policy never observes ground-truth/external rewards (dense or sparse) and receives no success labels during training.</li>
-<li>No demonstrations or offline trajectories. The policy starts with random actions and learns only from on-policy interaction.</li>
-<li>No task-specific tuning or calibration. Reward models are used as-is, with fixed prompting across tasks.</li>
+<li><b>No ground-truth rewards.</b> The policy never observes ground-truth/external rewards (dense or sparse) and receives no success labels during training.</li>
+<li><b>No demonstrations or offline trajectories.</b> The policy starts with random actions and learns only from on-policy interaction.</li>
+<li><b>No task-specific tuning or calibration.</b> Reward models are used as-is, with fixed prompting across tasks.</li>
 </ul>
-
+<br><br>
+<b>Baselines:</b> We test the current best general-purpose reasoning models, including <b>GPT-5</b>, <b>Gemini-3-Pro</b>,
+and <b>Gemini Robotics-ER 1.5</b>. We also include the strongest existing special-purpose reward models: <b>LIV</b>, <b>ReWiND</b>, <b>VLAC</b>, <b>TOPReward</b>, <b>RoboReward</b>,
+<b>Robometer</b>, and <b>LRM</b>. 
    
                 <!-- <br><br>
                 <p>
@@ -1142,11 +1282,17 @@ Unlike prior work that (i) learns from ground-truth rewards and/or (ii) tunes re
                 src="./paper_figs/icml_figures_all_tasks_hor.png"
                 class="inline-figure-six"
               />
+              <figcaption>
+              Overview of tasks and environments we include in the evaluation of SOLE-R1 reasoning for guiding online RL. 
+              </figcaption> 
             </div>
             <h3 class="title is-4">1) SOLE-R1 enables zero-shot online RL from scratch</h3>
             <p>
                 <!-- ROVER shows higher correlation with ground-truth task progress estimates. -->
-                SOLE-R1 achieves at least 50% success on 24 tasks, substantially outperforming all baselines (Figure 3). The strongest baselines include GPT-5 and Gemini, but they reach 50% success on only 7 and 5 tasks, respectively. The non-reasoning models achieve near-zero success on most tasks, with the exception of ReWiND in Meta-World, where it achieves higher success since it is trained on hundreds of Meta-World demonstrations
+                SOLE-R1 achieves at least 50% success on 24 tasks, substantially outperforming all baselines (Figure 3). The strongest baselines include GPT-5 and Gemini, but they reach 50% success on only 7 and 5 tasks, respectively. 
+The non-reasoning
+models achieve near-zero success on all tasks, with the exception of Meta-World tasks, where
+Robometer, RoboReward, and ReWiND achieve above 40% success rate on 4 tasks.
 
                 <br><br>
                 <b>SOLE-R1 generalizes to unseen tasks and environments.</b>
@@ -1166,22 +1312,23 @@ We also see SOLE-R1 solve tasks with camera views that were not used during trai
                 src="./paper_figs/res_fig1.png"
                 class="inline-figure-six"
               />
+              <figcaption>
+              Figure 3: Zero-shot success rate of online RL across 40 tasks. We plot the mean and standard error across three random seeds (real-world experiments use a single seed, shown as a single value). In all experiments, the robot begins with a random policy and learns entirely through interaction with the task, guided only by the predicted rewards.
+              </figcaption> 
             </div>
             <br>
 
-            <h3 class="title is-4">2) SOLE-R1 is robust to the exploitation observed with GPT-5 and Gemini-3-Pro</h3>
+            <h3 class="title is-4">2) SOLE-R1 is robust to the exploitation observed with existing vision-language reasoning models</h3>
 
             <div class="content has-text-justified">
              <p>
-We analyze failures at two levels: (i) task-level reward pathologies (is the reward exploitable, miscalibrated, or too weak to drive learning?) and (ii) frame-level reasoning errors (what perceptual/temporal evidence is missed when progress is incorrect).
-<br><br>
 We use the perceived-vs-true success plot (Figure 4) to separate failures into two types: reward-hacking (high perceived, low true) versus signal-limited (low perceived, low true).
-General-purpose VLM rewarders (GPT-5 and Gemini) predominantly fail via reward hacking: online RL discovers behaviors that elicit inflated progress predictions without completing the task. 
-We show an example of reward hacking with picking up the cube in Figure 4 and an extended set of examples in Figure ??. SOLE-R1 failures more often fall into the signal-limited failure type, suggesting the model typically recognizes non-success but can still provide rewards that are too flat/noisy to bootstrap exploration within the episode budget (as shown in the correlation analyses
-between predicted and true rewards in Appendix C).
-<br><br>
+General-purpose VLM reasoning models (GPT-5 and Gemini) predominantly fail via reward hacking: online RL discovers behaviors that elicit inflated progress predictions without completing the task. 
+We show an example of reward hacking with picking up the cube in Figure 4 (and an extended set of examples in Figure 7 in the paper). 
+SOLE-R1 failures more often fall into the signal-limited failure type, suggesting the model typically recognizes non-success but can still provide rewards that are too flat/noisy to bootstrap exploration within the episode budget.
+<!-- <br><br>
 Qualitative review of rollouts highlights three recurring SOLE-R1 error modes: (1) temporal under-detection of brief events (contact, latch release, button actuation, insertion “click”), especially when they occur between reward-query steps or under occlusion; (2) ambiguous object state
-in clutter/partial views (uncertain grasp, insertion, or seating), where conservative progress reduces hacking but weakens stepping-stone reinforcement; and (3) occasional goal-consistent appearance shortcuts (e.g., proximity/alignment scored as partial progress without completion), typically saturating at moderate progress instead of full completion.
+in clutter/partial views (uncertain grasp, insertion, or seating), where conservative progress reduces hacking but weakens stepping-stone reinforcement; and (3) occasional goal-consistent appearance shortcuts (e.g., proximity/alignment scored as partial progress without completion), typically saturating at moderate progress instead of full completion. -->
 
             </p>
             </div>
@@ -1191,12 +1338,15 @@ in clutter/partial views (uncertain grasp, insertion, or seating), where conserv
               class="inline-figure-six"
               />
             </div>
+              <figcaption>
+              Figure 4: Perceived vs true success in zero-shot RL. Perceived success is the average max progress predicted (RoboReward is excluded as it does not provide dense rewards). True success is the average max ground-truth reward achieved.
+              </figcaption> 
             <br>
             <h3 class="title is-4">3) SOLE-R1 model and training recipe follows a scaling law driven by diversity of training tasks</h3>
 
             <div class="content has-text-justified">
               <p>
-We find that our data synthesis and training recipe follows a scaling law driven by the diversity of training tasks (Figure 6). We train variants of SOLE-R1 with an increasing number of task types included in our training data synthesis (details in Appendix M). The figure below plots the number of downstream tasks that achieve different success thresholds as a function of training task diversity.
+We find that our data synthesis and training recipe follows a scaling law driven by the diversity of training tasks (Figure 6). We train variants of SOLE-R1 with an increasing number of task types included in our training data synthesis (details in Appendix M of the paper). The figure below plots the number of downstream tasks that achieve different success thresholds as a function of training task diversity.
 </p>
             </div>
             <div class="content has-text-centered">
@@ -1206,6 +1356,9 @@ We find that our data synthesis and training recipe follows a scaling law driven
                 class="inline-figure-six"
                 style="max-width: 500px; width: 100%; height: auto;"
                 />
+              <figcaption>
+              Figure 6: Tasks solved by SOLE-R1 vs training task diversity
+              </figcaption> 
             </div>
 
 
@@ -1214,8 +1367,45 @@ We find that our data synthesis and training recipe follows a scaling law driven
       </div>
     </section>
 
+      <section class="section" id="video-demos">
+        <div class="container is-max-desktop">
+            <div class="video-demo-frame-wrapper">
+            <iframe
+              src="./index_sole_videos.html"
+              class="video-demo-frame2"
+              loading="lazy"
+            ></iframe>
+            </div>
+        </div>
+    </section>
+
     <div class="hr"></div>
 
+        <div class="hr"></div>
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title has-text-centered">BibTeX</h2>
+        <pre style="width: 100%;"><code>@article{schroeder2026soler1,
+  title         = {SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot Reinforcement Learning},
+  author        = {Schroeder, Philip and Weng, Thomas and Schmeckpeper, Karl and Rosen, Eric and Hart, Stephen and Biza, Ondrej},
+  journal       = {arXiv preprint arXiv:2603.28730},
+  year          = {2026},
+  eprint        = {2603.28730},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  doi           = {10.48550/arXiv.2603.28730},
+  url           = {https://arxiv.org/abs/2603.28730}
+}</code></pre>
+        <div class="has-text-left mt-2">
+          <button class="button is-small is-light" onclick="navigator.clipboard.writeText(document.querySelector('#BibTeX pre code').textContent)">
+            <span class="icon is-small">
+              <i class="fas fa-copy"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+    
 
     <!-- <div class="hr"></div>
     <section class="section" id="BibTeX">
