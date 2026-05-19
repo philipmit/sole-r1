@@ -1,0 +1,623 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SOLE-R1  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        background: #0f172a;
+        color: #e5e7eb;
+        text-align: center;
+      }
+
+      .container {
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+        opacity: 0.85;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Coming soon! <br>SOLE-R1 model checkpoints, data, video demos, and code will be available here shortly. </h1>
+    </div>
+  </body>
+</html> -->
+
+ 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot RL"
+    />
+    <meta
+      name="keywords"
+      content="GVL, value learning, vision language models, VLM, robotics, reinforcement learning"
+    />
+    <!-- <meta
+      property="og:image"
+      content="https://generative-value-learning.github.io/static/images/icv/method.png"
+    /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SOLE-R1</title>
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SOLE-R1" />
+    <meta
+      name="twitter:description"
+      content=" "
+    />
+    <!-- <meta
+      name="twitter:image"
+      content="https://generative-value-learning.github.io/static/images/icv/method.png"
+    /> -->
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+
+    <!-- <link rel="icon" href="./static/images/favicon.svg" /> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+<style>
+@supports (-webkit-hyphens: none) {
+  #taskDropdown,
+  #speedDropdown, 
+  #trajDropdown, 
+  #maxProgressDropdown {
+    font-size: 16px;
+    transform: scale(1.12);
+    transform-origin: left center;
+  }
+}
+select {
+  line-height: 1.4;
+  padding: 0.25rem 0.5rem;
+}
+
+body {
+  font-family: system-ui;
+  /* background: #f5f5f5; */
+  background: #white;
+  max-width: 1500px;
+  margin: 2rem auto;
+}
+
+h1 {
+  text-align: center;
+
+}
+
+.video-block {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+}
+
+video {
+  width: 100%;
+  margin-top: .5rem;
+}
+
+.description {
+  font-size: 1.05em;
+  margin-bottom: .3rem;
+  font-family: "Google Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: bold;
+}
+
+/* video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+} */
+
+/* video {
+  filter: brightness(1.001);
+} */
+ video::-webkit-media-controls-panel {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+video::-webkit-media-controls-overlay-enclosure {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Optional: helps avoid a “tinted” look if Chrome blends with page bg */
+video {
+  background: #000;
+}
+
+/* video {
+  filter: invert(1) hue-rotate(180deg);
+} */
+video::-webkit-media-controls-panel {
+  filter: invert(1) hue-rotate(180deg);
+}
+</style>
+</head>
+
+<body>
+
+    <section>
+      <h1 style="font-size:22.5px;font-weight: bold; ">Examples of tasks learned <i>solely</i> with SOLE-R1 rewards through online RL (starting from random policies)</h1>
+      <h1>
+      <!-- add horizontal line here -->
+         <hr style="border: 1px solid gray; margin: 20px 0; width: 95%; margin-left: auto; margin-right: auto;">
+
+      </h1>
+      <!-- <br> -->
+      <!-- <br> -->
+      <!-- <br> -->
+    </section>
+    <section>
+
+
+<label for="taskDropdown">Task:</label>
+
+<select id="taskDropdown" name="taskDropdown">
+  <!-- Category: RoboSuite -->
+  <optgroup label="RoboSuite">
+    <option  value="robosuite|Pick up the cube from the table.">
+      Pick up the cube from the table.
+    </option>
+    <option value="robosuite|Open the door.">
+      Open the door.
+    </option>
+  </optgroup>
+
+  <!-- Category: Real-world -->
+  <optgroup label="Real-world: Biza">
+    <option value="real_world_biza|Open the drawer.">
+      Open the drawer.
+    </option>
+    <option value="real_world_biza|Insert the pipe into the opening.">
+      Insert the pipe into the opening.
+    </option>
+    <option selected value="real_world_biza|Push the can near the blue cube.">
+      Push the can near the blue cube.
+    </option>
+    <option value="real_world_biza|Touch the strawberry.">
+      Touch the strawberry.
+    </option>
+    <option value="real_world_biza|Close the drawer.">
+      Close the drawer.
+    </option>
+    <option value="real_world_biza|Pick the can from the table.">
+      Pick the can from the table.
+    </option>
+  </optgroup>
+
+  <!-- Category: ManiSkill -->
+  <optgroup label="ManiSkill">
+    <option value="maniskill|Pick up the cube from the table. (Franka)">
+      Pick up the cube from the table. (Franka)
+    </option>
+    <option value="maniskill|Pull the cube into the target area.">
+      Pull the cube into the target area.
+    </option>
+    <option value="maniskill|Push the cube into the target area.">
+      Push the cube into the target area.
+    </option>
+    <option value="maniskill|Pull the drawer open.">
+      Pull the drawer open.
+    </option>
+    <option value="maniskill|Pick up the cube from the table. (WidowXAI)">
+      Pick up the cube from the table. (WidowXAI)
+    </option>
+    <option value="maniskill|Pick up the cube from the table. (SO-100)">
+      Pick up the cube from the table. (SO-100)
+    </option>
+    <option value="maniskill|Pick up the object from the table.">
+      Pick up the object from the table.
+    </option>
+  </optgroup>
+
+  <!-- Category: LIBERO -->
+  <optgroup label="LIBERO">
+    <option value="libero|Close the top drawer.">
+      Close the top drawer.
+    </option>
+    <option value="libero|Open the microwave door.">
+      Open the microwave door.
+    </option>
+    <option value="libero|Close the microwave door.">
+      Close the microwave door.
+    </option>
+    <option value="libero|Rotate the knob to turn the stove on.">
+      Rotate the knob to turn the stove on.
+    </option>
+  </optgroup>
+
+  <!-- Category: Meta-world -->
+  <optgroup label="Meta-world">
+    <option value="metaworld|Push the puck into the net.">
+      Push the puck into the net.
+    </option>
+    <option value="metaworld|Close the door.">
+      Close the door.
+    </option>
+    <option value="metaworld|Close the drawer.">
+      Close the drawer.
+    </option>
+    <option value="metaworld|Push the red handle to the right.">
+      Push the red handle to the right.
+    </option>
+    <option value="metaworld|Slide the window closed.">
+      Slide the window closed.
+    </option>
+    <option value="metaworld|Press the red handle down.">
+      Press the red handle down.
+    </option>
+    <option value="metaworld|Push the red handle to the left.">
+      Push the red handle to the left.
+    </option>
+    <option value="metaworld|Slide the window open.">
+      Slide the window open.
+    </option>
+    <option value="metaworld|Push the soccer ball into the net.">
+      Push the soccer ball into the net.
+    </option>
+  </optgroup>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<label for="speedDropdown">Playback speed:</label>
+<select id="speedDropdown" name="speedDropdown">
+  <option value="0.25">0.25×</option>
+  <option value="0.5">0.5×</option>
+  <option value="0.75">0.75×</option>
+  <option value="1" selected>1×</option>
+  <option value="1.25">1.25×</option>
+  <option value="1.5">1.5×</option>
+  <option value="1.75">1.75×</option>
+  <option value="2" >2×</option>
+</select>
+<br>
+<div id="video-container"></div>
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+
+<script>
+const container = document.getElementById("video-container");
+const dropdown = document.getElementById("taskDropdown");
+const speedDropdown = document.getElementById("speedDropdown");
+
+const maxSupportedPlaybackSpeed = 2;
+
+const savedPlaybackSpeed = localStorage.getItem("globalPlaybackSpeed") || "1";
+speedDropdown.value = String(
+  Math.min(Number(savedPlaybackSpeed) || 1, maxSupportedPlaybackSpeed)
+);
+
+function getSelectedPlaybackSpeed() {
+  const requestedSpeed = Number(speedDropdown.value) || 1;
+  return Math.min(requestedSpeed, maxSupportedPlaybackSpeed);
+}
+
+function applyPlaybackSpeed(video) {
+  const speed = getSelectedPlaybackSpeed();
+  video.defaultPlaybackRate = speed;
+  video.playbackRate = speed;
+}
+
+
+
+const videoMap = {
+  // RoboSuite
+  "robosuite|Pick up the cube from the table.": {
+    category: "RoboSuite",
+    description: "Pick up the cube from the table.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lift_interp10_20260112_232609_concatenated_web.mp4"
+  },
+  "robosuite|Open the door.": {
+    category: "RoboSuite",
+    description: "Open the door.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_door_interp10_20260112_231301_concatenated_web.mp4"
+  },
+
+  // Real-world: Biza
+  "real_world_biza|Open the drawer.": {
+    category: "Real-world",
+    description: "Open the drawer.",
+    file: "real_world_open_drawer_concatenated_web.mp4"
+  },
+  "real_world_biza|Insert the pipe into the opening.": {
+    category: "Real-world",
+    description: "Insert the pipe into the opening.",
+    file: "real_world_insert_pipe_concatenated_web.mp4"
+  },
+  "real_world_biza|Push the can near the blue cube.": {
+    category: "Real-world",
+    description: "Push the can near the blue cube.",
+    file: "real_world_push_can_concatenated_web.mp4"
+  },
+  "real_world_biza|Touch the strawberry.": {
+    category: "Real-world",
+    description: "Touch the strawberry.",
+    file: "real_world_touch_strawberry_concatenated_web.mp4"
+  },
+  "real_world_biza|Close the drawer.": {
+    category: "Real-world",
+    description: "Close the drawer.",
+    file: "real_world_close_drawer_concatenated_web.mp4"
+  },
+  "real_world_biza|Pick the can from the table.": {
+    category: "Real-world",
+    description: "Pick the can from the table.",
+    file: "real_world_pick_can_concatenated_web.mp4"
+  },
+
+  // ManiSkill
+  "maniskill|Pick up the cube from the table. (Franka)": {
+    category: "ManiSkill",
+    description: "Pick up the cube from the table. (Franka)",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube_switchview_interp10_20260112_194227_concatenated_web.mp4"
+  },
+  "maniskill|Pull the cube into the target area.": {
+    category: "ManiSkill",
+    description: "Pull the cube into the target area.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mspullcube_switchview_interp10_20260112_223756_concatenated_web.mp4"
+  },
+  "maniskill|Push the cube into the target area.": {
+    category: "ManiSkill",
+    description: "Push the cube into the target area.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mspushcube_switchview_interp10_20260112_223621_concatenated_web.mp4"
+  },
+  "maniskill|Pull the drawer open.": {
+    category: "ManiSkill",
+    description: "Pull the drawer open.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_msopendrawer_20260112_032912_concatenated_web.mp4"
+  },
+  "maniskill|Pick up the cube from the table. (WidowXAI)": {
+    category: "ManiSkill",
+    description: "Pick up the cube from the table. (WidowXAI)",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube3_20260114_230023_concatenated_web.mp4"
+  },
+  "maniskill|Pick up the cube from the table. (SO-100)": {
+    category: "ManiSkill",
+    description: "Pick up the cube from the table. (SO-100)",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube2_20260112_230314_concatenated_web.mp4"
+  },
+  "maniskill|Pick up the object from the table.": {
+    category: "ManiSkill",
+    description: "Pick up the object from the table.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mspicksingleycb_switchview_interp10_20260112_222856_concatenated_web.mp4"
+  },
+
+  // LIBERO
+  "libero|Close the top drawer.": {
+    category: "LIBERO",
+    description: "Close the top drawer.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_cdr_interp5_20260115_214714_concatenated_web.mp4"
+  },
+  "libero|Open the microwave door.": {
+    category: "LIBERO",
+    description: "Open the microwave door.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_omi_20260119_030648_concatenated_web.mp4"
+  },
+  "libero|Close the microwave door.": {
+    category: "LIBERO",
+    description: "Close the microwave door.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_cmi_interp5_20260115_215001_concatenated_web.mp4"
+  },
+  "libero|Rotate the knob to turn the stove on.": {
+    category: "LIBERO",
+    description: "Rotate the knob to turn the stove on.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_ost_20260119_031115_concatenated_web.mp4"
+  },
+
+  // Meta-world
+  "metaworld|Push the puck into the net.": {
+    category: "Meta-world",
+    description: "Push the puck into the net.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_plate_50_20684_20251216_042430.605_concatenated_web.mp4"
+  },
+  "metaworld|Close the door.": {
+    category: "Meta-world",
+    description: "Close the door.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cdo_38_17173_20251216_034635.990_concatenated_web.mp4"
+  },
+  "metaworld|Close the drawer.": {
+    category: "Meta-world",
+    description: "Close the drawer.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cdr_51_24159_20251216_042619.899_concatenated_web.mp4"
+  },
+  "metaworld|Push the red handle to the right.": {
+    category: "Meta-world",
+    description: "Push the red handle to the right.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cfa_48_14339_20251216_033123.679_concatenated_web.mp4"
+  },
+  "metaworld|Slide the window closed.": {
+    category: "Meta-world",
+    description: "Slide the window closed.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cwi_41_3350_20251216_034847.908_concatenated_web.mp4"
+  },
+  "metaworld|Press the red handle down.": {
+    category: "Meta-world",
+    description: "Press the red handle down.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_hp_38_2523_20251216_033500.463_concatenated_web.mp4"
+  },
+  "metaworld|Push the red handle to the left.": {
+    category: "Meta-world",
+    description: "Push the red handle to the left.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_ofa_48_19154_20251216_040010.102_concatenated_web.mp4"
+  },
+  "metaworld|Slide the window open.": {
+    category: "Meta-world",
+    description: "Slide the window open.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_owi_41_14140_20251216_035855.178_concatenated_web.mp4"
+  },
+  "metaworld|Push the soccer ball into the net.": {
+    category: "Meta-world",
+    description: "Push the soccer ball into the net.",
+    file: "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_soc_50_17746_20251216_040514.633_concatenated_web.mp4"
+  }
+};
+
+const videoFiles = [
+  // robosuite
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lift_interp10_20260112_232609_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_door_interp10_20260112_231301_concatenated_web.mp4',
+
+  // real-world
+  'real_world_open_drawer_concatenated_web.mp4',
+  'real_world_insert_pipe_concatenated_web.mp4',
+  'real_world_push_can_concatenated_web.mp4',
+  'real_world_touch_strawberry_concatenated_web.mp4',
+  'real_world_close_drawer_concatenated_web.mp4',
+  'real_world_pick_can_concatenated_web.mp4',
+
+  // maniskill
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube_switchview_interp10_20260112_194227_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mspullcube_switchview_interp10_20260112_223756_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mspushcube_switchview_interp10_20260112_223621_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_msopendrawer_20260112_032912_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube3_20260114_230023_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube2_20260112_230314_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mspicksingleycb_switchview_interp10_20260112_222856_concatenated_web.mp4',
+
+  // libero
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_cdr_interp5_20260115_214714_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_cmi_interp5_20260115_215001_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_omi_20260119_030648_concatenated_web.mp4',
+  'q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_lib_ost_20260119_031115_concatenated_web.mp4',
+
+  // metaworld
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_plate_50_20684_20251216_042430.605_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cdo_38_17173_20251216_034635.990_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cdr_51_24159_20251216_042619.899_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cfa_48_14339_20251216_033123.679_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_cwi_41_3350_20251216_034847.908_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_hp_38_2523_20251216_033500.463_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_ofa_48_19154_20251216_040010.102_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_owi_41_14140_20251216_035855.178_concatenated_web.mp4",
+  "q3vl8b_1129b_sftv2_lr1e5_eb48_85000_soc_50_17746_20251216_040514.633_concatenated_web.mp4",
+];
+
+
+function renderVideos(selectedKey = "real_world_biza|Push the can near the blue cube.") {
+  container.innerHTML = "";
+
+  const item = videoMap[selectedKey];
+
+  if (!item) {
+    container.textContent = "No video found for this selection.";
+    return;
+  }
+
+  const block = document.createElement("div");
+  block.className = "video-block";
+
+  const desc = document.createElement("p");
+  desc.className = "description";
+  desc.innerHTML = '&nbsp;Task: "' + item.description + '"';
+
+  const video = document.createElement("video");
+  video.setAttribute("controls", "");
+  video.setAttribute("controlslist", "");
+  video.disablePictureInPicture = true;
+
+  const source = document.createElement("source");
+  source.src = "videos/" + item.file;
+  source.type = "video/mp4";
+
+  video.appendChild(source);
+
+  video.addEventListener("loadedmetadata", () => {
+    applyPlaybackSpeed(video);
+  });
+  block.appendChild(desc);
+  block.appendChild(video);
+  container.appendChild(block);
+}
+
+dropdown.addEventListener("change", function () {
+  renderVideos(this.value);
+});
+
+speedDropdown.addEventListener("change", () => {
+  localStorage.setItem("globalPlaybackSpeed", speedDropdown.value);
+
+  document.querySelectorAll("video").forEach(video => {
+    const hadStarted = video.currentTime > 0 || !video.paused;
+    const shouldResume = !video.paused && !video.ended;
+
+    applyPlaybackSpeed(video);
+
+    if (hadStarted) {
+      video.pause();
+      video.currentTime = 0;
+      video.load();
+
+      video.addEventListener(
+        "loadedmetadata",
+        () => {
+          applyPlaybackSpeed(video);
+
+          if (shouldResume) {
+            video.play().catch(error => {
+              console.warn("Video playback could not be restarted:", error);
+            });
+          }
+        },
+        { once: true }
+      );
+    }
+  });
+});
+
+renderVideos();
+</script>
+
+</body>
+</html>

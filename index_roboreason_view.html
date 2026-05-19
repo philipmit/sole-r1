@@ -1,0 +1,674 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SOLE-R1  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        background: #0f172a;
+        color: #e5e7eb;
+        text-align: center;
+      }
+
+      .container {
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+        opacity: 0.85;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Coming soon! <br>SOLE-R1 model checkpoints, data, video demos, and code will be available here shortly. </h1>
+    </div>
+  </body>
+</html> -->
+
+
+
+
+<!-- rm /data/sls/scratch/pschro/roboreason_view/index.html -->
+<!-- nano /data/sls/scratch/pschro/roboreason_view/index.html -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot RL"
+    />
+    <meta
+      name="keywords"
+      content="GVL, value learning, vision language models, VLM, robotics, reinforcement learning"
+    />
+    <!-- <meta
+      property="og:image"
+      content="https://generative-value-learning.github.io/static/images/icv/method.png"
+    /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RoboReason</title>
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SOLE-R1" />
+    <meta
+      name="twitter:description"
+      content=" "
+    />
+    <!-- <meta
+      name="twitter:image"
+      content="https://generative-value-learning.github.io/static/images/icv/method.png"
+    /> -->
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+
+    <!-- <link rel="icon" href="./static/images/favicon.svg" /> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+<style>
+
+@supports (-webkit-hyphens: none) {
+  #taskDropdown,
+  #speedDropdown, 
+  #trajDropdown, 
+  #maxProgressDropdown {
+    font-size: 16px;
+    transform: scale(1.12);
+    transform-origin: left center;
+  }
+}
+body {
+  font-family: system-ui;
+  /* background: #f5f5f5; */
+  background: #white;
+  max-width: 1500px;
+  margin: 2rem auto;
+}
+
+h1 {
+  text-align: center;
+
+}
+
+.video-block {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+}
+
+video {
+  width: 100%;
+  margin-top: .5rem;
+}
+
+.description {
+  font-size: 1.1em;
+  margin-bottom: .3rem;
+}
+
+/* video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+} */
+
+/* video {
+  filter: brightness(1.001);
+} */
+ video::-webkit-media-controls-panel {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+video::-webkit-media-controls-overlay-enclosure {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Optional: helps avoid a “tinted” look if Chrome blends with page bg */
+video {
+  background: #000;
+}
+
+/* video {
+  filter: invert(1) hue-rotate(180deg);
+} */
+video::-webkit-media-controls-panel {
+  filter: invert(1) hue-rotate(180deg);
+}
+</style>
+</head>
+
+<body>
+
+    <section>
+      <!-- <h1 style="font-size:30px;font-weight: bold;">Examples comparing SOLE-R1 vs Robometer, RoboReward, & TOPReward</h1> -->
+      <h1 style="font-size:22.5px;font-weight: bold; ">Examples (successful & unsuccessful) comparing SOLE-R1 vs Robometer, RoboReward, & TOPReward</h1>
+      <h1>
+       <!-- <hr style="border: 1px solid gray; margin: 20px 0;"> -->
+        <!-- decrease hr width -->
+         <hr style="border: 1px solid gray; margin: 20px 0; width: 90%; margin-left: auto; margin-right: auto;">
+      <h1>
+
+      </h1>
+      <!-- <br> -->
+      <!-- <br> -->
+      <!-- <br> -->
+    </section>
+    <section>
+
+
+    <label for="taskDropdown">Task:</label>
+  <select id="taskDropdown" name="taskDropdown">
+    <!-- <option>All</option> -->
+    <!-- Category 3: RoboSuite -->
+    <optgroup label="RoboSuite">
+      <option selected>Pick up the cube from the table.</option>
+      <option>Open the door.</option>
+    </optgroup>
+
+    <!-- Category 1: Real-world: Biza -->
+    <optgroup label="Real-world: Biza">
+      <option>Open the drawer.</option>
+      <option>Insert the pipe into the opening.</option>
+      <option>Push the can near the blue cube.</option>
+      <!-- <option>Touch the strawberry.</option> -->
+      <option>Close the drawer.</option>
+      <option>Pick the can from the table.</option>
+    </optgroup>
+
+    <!-- Category 2: ManiSkill -->
+    <optgroup label="ManiSkill">
+      <option>Pick up the cube from the table. (Franka)</option>
+      <option>Pull the cube into the target area.</option>
+      <option>Push the cube into the target area.</option>
+      <!-- <option>Pull the drawer open.</option> -->
+      <!-- <option>Pick up the cube from the table. (WidowXAI)</option> -->
+      <!-- <option>Pick up the cube from the table. (SO-100)</option> -->
+      <!-- <option>Pick up the object from the table.</option> -->
+    </optgroup>
+
+
+    <!-- Category 4: LIBERO -->
+    <optgroup label="LIBERO">
+      <option>Close the top drawer.</option>
+      <option>Open the microwave door.</option>
+      <option>Close the microwave door.</option>
+      <option>Rotate the knob to turn the stove on.</option>
+    </optgroup>
+
+    <!-- Category 5: Real-world: SO-101 -->
+    <optgroup label="Real-world: SO-101">
+      <option>Pick-place cube (Jack Vial)</option>
+    </optgroup>
+
+  </select>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<label for="trajDropdown">Trajectory type:</label>
+<select id="trajDropdown" name="trajDropdown">
+  <option selected>Unsuccessful</option>
+  <option>Successful</option>
+</select>
+
+
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<span id="maxProgressControl">
+  <label for="maxProgressDropdown">Max ground-truth progress:</label>
+  <select id="maxProgressDropdown" name="maxProgressDropdown"></select>
+</span>
+
+<span id="videoNumberControl" style="display:none;">
+  <label for="videoNumberDropdown">Video number:</label>
+  <select id="videoNumberDropdown" name="videoNumberDropdown"></select>
+</span>
+
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<label for="speedDropdown">Speed:</label>
+<select id="speedDropdown" name="speedDropdown">
+  <option value="0.25">0.25×</option>
+  <option value="0.5">0.5×</option>
+  <option value="0.75">0.75×</option>
+  <option value="1">1×</option>
+  <option value="1.25">1.25×</option>
+  <option value="1.5">1.5×</option>
+  <option value="1.75">1.75×</option>
+  <option value="2" selected>2×</option>
+  <option value="3">3×</option>
+  <option value="4">4×</option>
+</select>
+
+<br>
+
+
+
+<div id="video-container"></div>
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+ -->
+
+<script>
+    
+
+// conda activate env310_rr_v3
+// import os
+// os.getcwd()
+
+// base_dir = '/Users/philipschroeder/Library/Mobile Documents/com~apple~CloudDocs/PR1-main (2)/roboreason_view/model_outputs/combined'
+
+// all_files = []
+// for root, dirs, files in os.walk(base_dir):
+//     for file in files:
+//         full_path = os.path.join(root, file)
+//         all_files.append(full_path)
+
+// all_files2 = [x.split(base_dir+'/')[-1] for x in all_files]
+// all_files3 = [x for x in all_files2 if x.endswith('.mp4')]
+// all_files3
+
+
+// print(len(all_files))
+// print(all_files[:5]) 
+
+
+const videoFiles = ['libero/close_microwave_door/successful/libero_close_microwave_door_episode_08_successful_max_reward_100.mp4', 'libero/close_microwave_door/successful/libero_close_microwave_door_episode_09_successful_max_reward_100.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_00_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_07_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_01_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_06_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_05_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_02_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_04_unsuccessful_max_reward_0.mp4', 'libero/close_microwave_door/unsuccessful/libero_close_microwave_door_episode_03_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/successful/libero_open_microwave_door_episode_07_successful_max_reward_100.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_02_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_05_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_03_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_04_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_00_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_06_unsuccessful_max_reward_0.mp4', 'libero/open_microwave_door/unsuccessful/libero_open_microwave_door_episode_01_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/successful/libero_close_top_drawer_episode_09_successful_max_reward_100.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_04_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_03_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_05_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_02_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_01_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_06_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_00_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_08_unsuccessful_max_reward_0.mp4', 'libero/close_top_drawer/unsuccessful/libero_close_top_drawer_episode_07_unsuccessful_max_reward_0.mp4', 'libero/turn_on_stove/successful/libero_turn_on_stove_episode_08_successful_max_reward_100.mp4', 'libero/turn_on_stove/successful/libero_turn_on_stove_episode_07_successful_max_reward_100.mp4', 'libero/turn_on_stove/successful/libero_turn_on_stove_episode_11_successful_max_reward_100.mp4', 'libero/turn_on_stove/successful/libero_turn_on_stove_episode_06_successful_max_reward_100.mp4', 'libero/turn_on_stove/successful/libero_turn_on_stove_episode_09_successful_max_reward_100.mp4', 'libero/turn_on_stove/successful/libero_turn_on_stove_episode_10_successful_max_reward_100.mp4', 'libero/turn_on_stove/unsuccessful/libero_turn_on_stove_episode_00_unsuccessful_max_reward_0.mp4', 'libero/turn_on_stove/unsuccessful/libero_turn_on_stove_episode_01_unsuccessful_max_reward_0.mp4', 'libero/turn_on_stove/unsuccessful/libero_turn_on_stove_episode_02_unsuccessful_max_reward_0.mp4', 'libero/turn_on_stove/unsuccessful/libero_turn_on_stove_episode_05_unsuccessful_max_reward_0.mp4', 'libero/turn_on_stove/unsuccessful/libero_turn_on_stove_episode_03_unsuccessful_max_reward_0.mp4', 'libero/turn_on_stove/unsuccessful/libero_turn_on_stove_episode_04_unsuccessful_max_reward_0.mp4', 'real_world_biza/insert_pipe/successful/real_world_biza_insert_pipe_episode_05_successful.mp4', 'real_world_biza/insert_pipe/successful/real_world_biza_insert_pipe_episode_07_successful.mp4', 'real_world_biza/insert_pipe/successful/real_world_biza_insert_pipe_episode_06_successful.mp4', 'real_world_biza/insert_pipe/unsuccessful/real_world_biza_insert_pipe_episode_00_unsuccessful.mp4', 'real_world_biza/insert_pipe/unsuccessful/real_world_biza_insert_pipe_episode_04_unsuccessful.mp4', 'real_world_biza/insert_pipe/unsuccessful/real_world_biza_insert_pipe_episode_01_unsuccessful.mp4', 'real_world_biza/insert_pipe/unsuccessful/real_world_biza_insert_pipe_episode_02_unsuccessful.mp4', 'real_world_biza/insert_pipe/unsuccessful/real_world_biza_insert_pipe_episode_03_unsuccessful.mp4', 'real_world_biza/push_can/successful/real_world_biza_push_can_episode_06_successful.mp4', 'real_world_biza/push_can/successful/real_world_biza_push_can_episode_04_successful.mp4', 'real_world_biza/push_can/successful/real_world_biza_push_can_episode_05_successful.mp4', 'real_world_biza/push_can/unsuccessful/real_world_biza_push_can_episode_00_unsuccessful.mp4', 'real_world_biza/push_can/unsuccessful/real_world_biza_push_can_episode_01_unsuccessful.mp4', 'real_world_biza/push_can/unsuccessful/real_world_biza_push_can_episode_02_unsuccessful.mp4', 'real_world_biza/push_can/unsuccessful/real_world_biza_push_can_episode_03_unsuccessful.mp4', 'real_world_biza/close_drawer/successful/real_world_biza_close_drawer_episode_04_successful.mp4', 'real_world_biza/close_drawer/successful/real_world_biza_close_drawer_episode_03_successful.mp4', 'real_world_biza/close_drawer/successful/real_world_biza_close_drawer_episode_05_successful.mp4', 'real_world_biza/close_drawer/unsuccessful/real_world_biza_close_drawer_episode_02_unsuccessful.mp4', 'real_world_biza/close_drawer/unsuccessful/real_world_biza_close_drawer_episode_00_unsuccessful.mp4', 'real_world_biza/close_drawer/unsuccessful/real_world_biza_close_drawer_episode_01_unsuccessful.mp4', 'real_world_biza/open_drawer/successful/real_world_biza_open_drawer_episode_08_successful.mp4', 'real_world_biza/open_drawer/successful/real_world_biza_open_drawer_episode_07_successful.mp4', 'real_world_biza/open_drawer/successful/real_world_biza_open_drawer_episode_06_successful.mp4', 'real_world_biza/open_drawer/unsuccessful/real_world_biza_open_drawer_episode_00_unsuccessful.mp4', 'real_world_biza/open_drawer/unsuccessful/real_world_biza_open_drawer_episode_04_unsuccessful.mp4', 'real_world_biza/open_drawer/unsuccessful/real_world_biza_open_drawer_episode_01_unsuccessful.mp4', 'real_world_biza/open_drawer/unsuccessful/real_world_biza_open_drawer_episode_05_unsuccessful.mp4', 'real_world_biza/open_drawer/unsuccessful/real_world_biza_open_drawer_episode_02_unsuccessful.mp4', 'real_world_biza/open_drawer/unsuccessful/real_world_biza_open_drawer_episode_03_unsuccessful.mp4', 'real_world_biza/pick_can/successful/real_world_biza_pick_can_episode_05_successful.mp4', 'real_world_biza/pick_can/successful/real_world_biza_pick_can_episode_07_successful.mp4', 'real_world_biza/pick_can/successful/real_world_biza_pick_can_episode_06_successful.mp4', 'real_world_biza/pick_can/unsuccessful/real_world_biza_pick_can_episode_01_unsuccessful.mp4', 'real_world_biza/pick_can/unsuccessful/real_world_biza_pick_can_episode_00_unsuccessful.mp4', 'real_world_biza/pick_can/unsuccessful/real_world_biza_pick_can_episode_04_unsuccessful.mp4', 'real_world_biza/pick_can/unsuccessful/real_world_biza_pick_can_episode_03_unsuccessful.mp4', 'real_world_biza/pick_can/unsuccessful/real_world_biza_pick_can_episode_02_unsuccessful.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_7.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_6.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_4.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_5.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_1.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_28.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_29.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_0.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_2.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_3.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_27.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_26.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_24.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_25.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_8.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_21.mp4', 
+'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_20.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_9.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_22.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/successful/jackvial_so101_pickplace_recap_merged_v2_episode_23.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_12.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_13.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_11.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_39.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_38.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_10.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_14.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_15.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_17.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_16.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_33.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_32.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_30.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_18.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_19.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_31.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_35.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_34.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_36.mp4', 'real_world_so101/jackvial_so101_pickplace_recap_merged_v2/unsuccessful/jackvial_so101_pickplace_recap_merged_v2_episode_37.mp4', 'maniskill/pull_cube/successful/maniskill_pull_cube_episode_19_successful_max_reward_100.mp4', 'maniskill/pull_cube/successful/maniskill_pull_cube_episode_17_successful_max_reward_100.mp4', 'maniskill/pull_cube/successful/maniskill_pull_cube_episode_18_successful_max_reward_100.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_15_unsuccessful_max_reward_25.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_13_unsuccessful_max_reward_24.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_06_unsuccessful_max_reward_20.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_14_unsuccessful_max_reward_24.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_07_unsuccessful_max_reward_20.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_02_unsuccessful_max_reward_16.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_12_unsuccessful_max_reward_23.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_04_unsuccessful_max_reward_19.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_01_unsuccessful_max_reward_12.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_11_unsuccessful_max_reward_22.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_08_unsuccessful_max_reward_21.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_16_unsuccessful_max_reward_30.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_03_unsuccessful_max_reward_18.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_05_unsuccessful_max_reward_19.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_00_unsuccessful_max_reward_10.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_09_unsuccessful_max_reward_21.mp4', 'maniskill/pull_cube/unsuccessful/maniskill_pull_cube_episode_10_unsuccessful_max_reward_21.mp4', 'maniskill/push_cube/successful/maniskill_push_cube_episode_15_successful_max_reward_100.mp4', 'maniskill/push_cube/successful/maniskill_push_cube_episode_16_successful_max_reward_100.mp4', 'maniskill/push_cube/successful/maniskill_push_cube_episode_19_successful_max_reward_100.mp4', 'maniskill/push_cube/successful/maniskill_push_cube_episode_18_successful_max_reward_100.mp4', 'maniskill/push_cube/successful/maniskill_push_cube_episode_17_successful_max_reward_100.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_10_unsuccessful_max_reward_22.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_05_unsuccessful_max_reward_20.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_00_unsuccessful_max_reward_17.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_09_unsuccessful_max_reward_22.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_03_unsuccessful_max_reward_18.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_11_unsuccessful_max_reward_23.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_08_unsuccessful_max_reward_22.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_04_unsuccessful_max_reward_19.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_02_unsuccessful_max_reward_18.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_07_unsuccessful_max_reward_21.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_12_unsuccessful_max_reward_23.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_01_unsuccessful_max_reward_18.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_06_unsuccessful_max_reward_21.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_13_unsuccessful_max_reward_23.mp4', 'maniskill/push_cube/unsuccessful/maniskill_push_cube_episode_14_unsuccessful_max_reward_40.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_14_successful_max_reward_78.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_26_successful_max_reward_96.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_27_successful_max_reward_98.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_29_successful_max_reward_100.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_17_successful_max_reward_80.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_25_successful_max_reward_94.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_28_successful_max_reward_100.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_23_successful_max_reward_92.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_22_successful_max_reward_90.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_21_successful_max_reward_90.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_20_successful_max_reward_88.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_15_successful_max_reward_80.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_19_successful_max_reward_88.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_18_successful_max_reward_86.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_24_successful_max_reward_92.mp4', 'maniskill/pick_cube/successful/maniskill_pick_cube_episode_16_successful_max_reward_80.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_02_unsuccessful_max_reward_32.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_04_unsuccessful_max_reward_32.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_10_unsuccessful_max_reward_82.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_08_unsuccessful_max_reward_36.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_05_unsuccessful_max_reward_32.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_03_unsuccessful_max_reward_32.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_13_unsuccessful_max_reward_100.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_11_unsuccessful_max_reward_82.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_00_unsuccessful_max_reward_26.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_06_unsuccessful_max_reward_32.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_12_unsuccessful_max_reward_86.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_01_unsuccessful_max_reward_32.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_07_unsuccessful_max_reward_34.mp4', 'maniskill/pick_cube/unsuccessful/maniskill_pick_cube_episode_09_unsuccessful_max_reward_76.mp4', 'robosuite/lift/successful/robosuite_lift_episode_16_successful_max_reward_100.mp4', 
+'robosuite/lift/successful/robosuite_lift_episode_18_successful_max_reward_100.mp4', 'robosuite/lift/successful/robosuite_lift_episode_17_successful_max_reward_100.mp4', 'robosuite/lift/successful/robosuite_lift_episode_14_successful_max_reward_100.mp4', 'robosuite/lift/successful/robosuite_lift_episode_15_successful_max_reward_100.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_10_unsuccessful_max_reward_35.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_00_unsuccessful_max_reward_1.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_09_unsuccessful_max_reward_25.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_01_unsuccessful_max_reward_2.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_11_unsuccessful_max_reward_37.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_07_unsuccessful_max_reward_10.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_08_unsuccessful_max_reward_24.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_12_unsuccessful_max_reward_38.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_02_unsuccessful_max_reward_4.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_05_unsuccessful_max_reward_6.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_06_unsuccessful_max_reward_8.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_03_unsuccessful_max_reward_4.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_13_unsuccessful_max_reward_100.mp4', 'robosuite/lift/unsuccessful/robosuite_lift_episode_04_unsuccessful_max_reward_4.mp4', 'robosuite/door/successful/robosuite_door_episode_15_successful_max_reward_100.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_02_unsuccessful_max_reward_3.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_10_unsuccessful_max_reward_35.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_09_unsuccessful_max_reward_35.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_03_unsuccessful_max_reward_4.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_13_unsuccessful_max_reward_100.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_11_unsuccessful_max_reward_36.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_08_unsuccessful_max_reward_35.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_12_unsuccessful_max_reward_36.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_04_unsuccessful_max_reward_8.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_07_unsuccessful_max_reward_35.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_00_unsuccessful_max_reward_0.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_14_unsuccessful_max_reward_100.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_01_unsuccessful_max_reward_0.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_05_unsuccessful_max_reward_15.mp4', 'robosuite/door/unsuccessful/robosuite_door_episode_06_unsuccessful_max_reward_35.mp4'];
+
+
+// -----------------------------
+// DROPDOWN ELEMENTS
+// -----------------------------
+const taskDropdown = document.getElementById("taskDropdown");
+const trajDropdown = document.getElementById("trajDropdown");
+
+const speedDropdown = document.getElementById("speedDropdown");
+
+function removeUnsupportedSpeedOptions() {
+  const maxSpeed = getMaxSupportedPlaybackSpeed();
+
+  [...speedDropdown.options].forEach(option => {
+    if (Number(option.value) > maxSpeed) {
+      option.remove();
+    }
+  });
+}
+
+removeUnsupportedSpeedOptions();
+
+localStorage.removeItem("globalPlaybackSpeed");
+const savedPlaybackSpeed = localStorage.getItem("globalPlaybackSpeed") || "1";
+const maxSupportedPlaybackSpeed = getMaxSupportedPlaybackSpeed();
+
+speedDropdown.value = String(
+  Math.min(Number(savedPlaybackSpeed) || 1, maxSupportedPlaybackSpeed)
+);
+speedDropdown.value = savedPlaybackSpeed;
+
+const maxProgressControl = document.getElementById("maxProgressControl");
+const maxProgressDropdown = document.getElementById("maxProgressDropdown");
+
+const videoNumberControl = document.getElementById("videoNumberControl");
+const videoNumberDropdown = document.getElementById("videoNumberDropdown");
+
+const container = document.getElementById("video-container");
+
+// -----------------------------
+// MAPPING: UI TEXT → FOLDER PATH
+// -----------------------------
+const taskToFolderMap = {
+  "Open the drawer.": "real_world_biza/open_drawer",
+  "Insert the pipe into the opening.": "real_world_biza/insert_pipe",
+  "Push the can near the blue cube.": "real_world_biza/push_can",
+  // "Touch the strawberry.": "real_world_biza/touch_strawberry",
+  "Close the drawer.": "real_world_biza/close_drawer",
+  "Pick the can from the table.": "real_world_biza/pick_can",
+
+  "Pick up the cube from the table. (Franka)": "maniskill/pick_cube",
+  "Pull the cube into the target area.": "maniskill/pull_cube",
+  "Push the cube into the target area.": "maniskill/push_cube",
+
+  "Pick up the cube from the table.": "robosuite/lift",
+  "Open the door.": "robosuite/door",
+
+  "Open the microwave door.": "libero/open_microwave_door",
+  "Close the microwave door.": "libero/close_microwave_door",
+  "Rotate the knob to turn the stove on.": "libero/turn_on_stove",
+  "Close the top drawer.": "libero/close_top_drawer",
+
+  "Pick-place cube (Jack Vial)":
+    "real_world_so101/jackvial_so101_pickplace_recap_merged_v2"
+};
+
+// -----------------------------
+// PARSE FILE PATH
+// -----------------------------
+function parsePath(filePath) {
+  const parts = filePath.split("/");
+
+  return {
+    category: parts[0],
+    dataset: parts[1],
+    trajectory: parts.length > 3 ? parts[2] : "all",
+    fullFolder: parts[0] + "/" + parts[1],
+    episode: getEpisodeNumber(filePath),
+    maxProgress: getMaxProgress(filePath)
+  };
+}
+
+// -----------------------------
+// EXTRACT EPISODE / VIDEO NUMBER
+// -----------------------------
+function getEpisodeNumber(filePath) {
+  const match = filePath.match(/episode_(\d+)/);
+  return match ? Number(match[1]) : null;
+}
+
+// -----------------------------
+// EXTRACT MAX PROGRESS / REWARD
+// -----------------------------
+function getMaxProgress(filePath) {
+  const match = filePath.match(/max_reward_(\d+)/);
+  return match ? Number(match[1]) : null;
+}
+
+// -----------------------------
+// GET FILES FOR CURRENT TASK + TRAJECTORY
+// -----------------------------
+function getBaseFilteredFiles() {
+  const selectedTask = taskDropdown.value;
+  const selectedTraj = trajDropdown.value.toLowerCase();
+  const mappedFolder = taskToFolderMap[selectedTask];
+
+  if (!mappedFolder) return [];
+
+  return videoFiles.filter(file => {
+    const parsed = parsePath(file);
+
+    return (
+      parsed.fullFolder === mappedFolder &&
+      parsed.trajectory === selectedTraj
+    );
+  });
+}
+
+// -----------------------------
+// NUMERIC SORT HELPER
+// -----------------------------
+function sortNumbersAscending(values) {
+  return values.sort((a, b) => a - b);
+}
+
+// -----------------------------
+// OTHER HELPERS
+// -----------------------------
+function isSafariBrowser() {
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+}
+
+function getMaxSupportedPlaybackSpeed() {
+  return isSafariBrowser() ? 2 : 4;
+}
+
+function getSelectedPlaybackSpeed() {
+  const requestedSpeed = Number(speedDropdown.value) || 1;
+  const maxSpeed = getMaxSupportedPlaybackSpeed();
+
+  return Math.min(requestedSpeed, maxSpeed);
+}
+
+// -----------------------------
+// POPULATE MAX PROGRESS DROPDOWN
+// -----------------------------
+function populateMaxProgressDropdown(files) {
+  const currentValue = maxProgressDropdown.value;
+
+  const maxProgressValues = sortNumbersAscending(
+    [...new Set(
+      files
+        .map(file => parsePath(file).maxProgress)
+        .filter(value => value !== null)
+    )]
+  );
+
+  maxProgressDropdown.innerHTML = "";
+
+  maxProgressValues.forEach(value => {
+    const option = document.createElement("option");
+    option.value = String(value);
+    option.textContent = value + "%";
+    maxProgressDropdown.appendChild(option);
+  });
+
+  const preferredDefault = 38;
+
+  if (maxProgressValues.includes(Number(currentValue))) {
+    maxProgressDropdown.value = currentValue;
+  } else if (maxProgressValues.includes(preferredDefault)) {
+    maxProgressDropdown.value = String(preferredDefault);
+  }
+}
+
+// -----------------------------
+// POPULATE VIDEO NUMBER DROPDOWN
+// -----------------------------
+function populateVideoNumberDropdown(files) {
+  const currentValue = videoNumberDropdown.value;
+
+  const videoNumbers = sortNumbersAscending(
+    [...new Set(
+      files
+        .map(file => parsePath(file).episode)
+        .filter(value => value !== null)
+    )]
+  );
+
+  videoNumberDropdown.innerHTML = "";
+
+  videoNumbers.forEach(value => {
+    const option = document.createElement("option");
+    option.value = String(value);
+    option.textContent = value;
+    videoNumberDropdown.appendChild(option);
+  });
+
+  if (videoNumbers.includes(Number(currentValue))) {
+    videoNumberDropdown.value = currentValue;
+  }
+}
+
+// -----------------------------
+// SHOW CORRECT SECONDARY DROPDOWN
+// -----------------------------
+function updateSecondaryControls(files) {
+  const selectedTraj = trajDropdown.value;
+  const selectedTask = taskDropdown.value;
+
+
+if (selectedTraj === "Successful" || 
+  selectedTask === "Open the drawer." || 
+  selectedTask === "Insert the pipe into the opening." ||
+  selectedTask === "Push the can near the blue cube." ||
+  selectedTask === "Touch the strawberry." ||
+  selectedTask === "Close the drawer." ||
+  selectedTask === "Pick the can from the table." ||
+  selectedTask === "Close the top drawer." ||
+  selectedTask === "Open the microwave door." ||
+  selectedTask === "Close the microwave door." ||
+  selectedTask === "Rotate the knob to turn the stove on." ||
+  selectedTask === "Pick-place cube (Jack Vial)"
+) {
+    maxProgressControl.style.display = "none";
+    videoNumberControl.style.display = "inline";
+    populateVideoNumberDropdown(files);
+  } else if (selectedTraj === "Unsuccessful") {
+    maxProgressControl.style.display = "inline";
+    videoNumberControl.style.display = "none";
+    populateMaxProgressDropdown(files);
+  } 
+}
+
+function getSelectedPlaybackSpeed() {
+  return Number(speedDropdown.value) || 1;
+}
+
+function applyPlaybackSpeedToAllVideos() {
+  const speed = getSelectedPlaybackSpeed();
+
+  document.querySelectorAll("video").forEach(video => {
+    video.playbackRate = speed;
+    video.defaultPlaybackRate = speed;
+  });
+}
+
+// -----------------------------
+// FILTER + RENDER
+// -----------------------------
+function renderVideos() {
+  const selectedTraj = trajDropdown.value;
+  const selectedTask = taskDropdown.value;
+  let filteredFiles = getBaseFilteredFiles();
+
+  updateSecondaryControls(filteredFiles);
+
+
+  if (selectedTraj === "Successful"|| 
+  selectedTask === "Open the drawer." || 
+  selectedTask === "Insert the pipe into the opening." ||
+  selectedTask === "Push the can near the blue cube." ||
+  selectedTask === "Touch the strawberry." ||
+  selectedTask === "Close the drawer." ||
+  selectedTask === "Pick the can from the table." ||
+  selectedTask === "Close the top drawer." ||
+  selectedTask === "Open the microwave door." ||
+  selectedTask === "Close the microwave door." ||
+  selectedTask === "Rotate the knob to turn the stove on." ||
+  selectedTask === "Pick-place cube (Jack Vial)" ) {
+    const selectedVideoNumber = Number(videoNumberDropdown.value);
+
+    filteredFiles = filteredFiles.filter(file => {
+      return parsePath(file).episode === selectedVideoNumber;
+    });
+  } else if (selectedTraj === "Unsuccessful") {
+    const selectedMaxProgress = Number(maxProgressDropdown.value);
+
+    filteredFiles = filteredFiles.filter(file => {
+      return parsePath(file).maxProgress === selectedMaxProgress;
+    });
+  }
+
+  container.innerHTML = "";
+
+  filteredFiles.forEach(file => {
+    const block = document.createElement("div");
+    block.className = "video-block";
+
+    const video = document.createElement("video");
+    video.setAttribute("controls", "");
+    video.disablePictureInPicture = true;
+    video.playbackRate = getSelectedPlaybackSpeed();
+    video.defaultPlaybackRate = getSelectedPlaybackSpeed();
+    video.setAttribute("controls", "");
+    video.disablePictureInPicture = true;
+
+    const source = document.createElement("source");
+    // source.src = "model_outputs/combined/" + file;
+    const VIDEO_BASE_URL = "https://storage.googleapis.com/roboreason-view-videos-philip/model_outputs/combined/";
+    source.src = VIDEO_BASE_URL + file;
+
+    source.type = "video/mp4";
+
+    video.appendChild(source);
+    block.appendChild(video);
+    container.appendChild(block);
+  });
+
+  if (filteredFiles.length === 0) {
+    container.innerHTML = "<p>No videos found for this selection.</p>";
+  }
+}
+
+// -----------------------------
+// EVENT LISTENERS
+// -----------------------------
+taskDropdown.addEventListener("change", renderVideos);
+trajDropdown.addEventListener("change", renderVideos);
+maxProgressDropdown.addEventListener("change", renderVideos);
+videoNumberDropdown.addEventListener("change", renderVideos);
+
+speedDropdown.addEventListener("change", () => {
+  localStorage.setItem("globalPlaybackSpeed", speedDropdown.value);
+
+  const speed = getSelectedPlaybackSpeed();
+
+  document.querySelectorAll("video").forEach(video => {
+    const wasPlaying = !video.paused && !video.ended;
+
+    video.pause();
+    video.playbackRate = speed;
+    video.defaultPlaybackRate = speed;
+    video.currentTime = 0;
+
+    if (wasPlaying) {
+      video.play().catch(error => {
+        console.warn("Video playback could not be restarted:", error);
+      });
+    }
+  });
+});
+// Initial render
+renderVideos();
+
+</script>
+
+</body>
+</html>
