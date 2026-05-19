@@ -288,7 +288,32 @@ video::-webkit-media-controls-panel {
   background: black;
 } */
 
+ video::-webkit-media-controls-panel {
+  background-image: none !important;
+  background-color: transparent !important;
+}
 
+video::-webkit-media-controls-enclosure {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+video::-webkit-media-controls-overlay-enclosure {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Optional: helps avoid a “tinted” look if Chrome blends with page bg */
+video {
+  background: #000;
+}
+
+/* video {
+  filter: invert(1) hue-rotate(180deg);
+} */
+video::-webkit-media-controls-panel {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 
     </style>
@@ -467,7 +492,7 @@ video::-webkit-media-controls-panel {
                   </span>
                   <span class="link-block">
                     <a
-                    href=""
+                    href="https://huggingface.co/datasets/pschro/sole_training_data"
                       target="_blank"
                       class="external-link button is-normal is-rounded is-dark"
                     >
@@ -625,6 +650,28 @@ video::-webkit-media-controls-panel {
         </div>
     </section>
   
+    <section class="section" id="gcs-video-demo">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered" style="font-size: 25px; margin-bottom: 16px;">
+        Timelapse of online RL using rewards from SOLE-R1 reasoning (top) vs GPT-5 reasoning (bottom)
+      </h2>
+
+      <video
+        controls
+        muted
+        playsinline
+        preload="metadata"
+        style="display: block; width: 100%; max-width: 1200px; height: auto; margin: 0 auto; border-radius: 18px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08); padding: 30px; background: white;"
+      >
+          <!-- src="https://storage.googleapis.com/sole-learned-tasks-videos-philip/final_web_videos/q3vl8b_1129b_sftv2_lr1e5_eb48_85000_v2_pt3b_mscube_switchview_interp10_20260112_194227_concatenated_timelapse_web.mp4" -->
+      <source
+      src="https://storage.googleapis.com/sole-learned-tasks-videos-philip/final_web_videos/q3vl8b_gemini_mscube_stacked_labeled2_web.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
         <div id="video-container"></div>
       </section>
 
