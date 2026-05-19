@@ -568,7 +568,10 @@ function renderVideos(selectedKey = "real_world_biza|Push the can near the blue 
   video.disablePictureInPicture = true;
 
   const source = document.createElement("source");
-  source.src = "videos/" + item.file;
+  // source.src = "videos/" + item.file;
+  // source.src = "model_outputs/combined/" + file;
+  const VIDEO_BASE_URL = "https://storage.googleapis.com/sole-learned-tasks-videos-philip/final_web_videos/";
+  source.src = VIDEO_BASE_URL + item.file;
   source.type = "video/mp4";
 
   video.appendChild(source);
