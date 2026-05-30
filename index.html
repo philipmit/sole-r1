@@ -624,16 +624,23 @@ video::-webkit-media-controls-panel {
   allowfullscreen
   style="display: block; margin: 0 0 0 50px;">
 </iframe> -->
+  <!-- src="https://www.youtube.com/embed/xGWOuck881Y?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0" -->
   <h2 class="title is-3 has-text-centered" style="font-size: 25px; margin: 0 0 8px 0;">Overview Video</h2>
   <iframe 
   width="93.8%" 
   height="315"
-  src="https://www.youtube.com/embed/xGWOuck881Y?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0"
+  src="https://www.youtube.com/embed/WDd98ZNva0g?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0"
   frameborder="0"
   allow="autoplay; encrypted-media"
   allowfullscreen
   style="display: block; margin: 0 0 0 50px;">
 </iframe>
+
+
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/WDd98ZNva0g?si=h4kk2WLIVAfK2VNe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+
+
+
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/-ig-p_uUi8Q?si=xGvs4ZbIkPbVgUjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/xGWOuck881Y?si=OXgS6OER3zm3UcEG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
         <br><br>
@@ -1254,8 +1261,8 @@ the links above.
             <!-- <br><br> -->
           <!-- To elicit robust reasoning,  -->
           <b>Training data:</b> We build the training data (Figure 2) in two stages: (1) foundational reasoning over space (single-image + depth) and time (multi-image/video), and (2) robot-video spatiotemporal reasoning specialized for dense progress estimation.
-          We generate over one million CoT reasoning examples from more than 40,000 real-world and simulated videos.
-          We also carefully curate a diverse collection of general spatial and multi-frame temporal reasoning data to serve as a foundational layer of our training mixture. 
+          We first carefully curate a diverse collection of general spatial and multi-frame temporal reasoning data (e.g., from SSR-CoT, SpatialVLM, Spot-the-diff, Embodied CoT, RoboVQA, Robo2VLM-Reasoning) to serve as a foundational layer of our training mixture. 
+          We then generate over 1 million CoT reasoning examples from more than 40,000 real-world and simulated videos.
           Together, this training induces video-native reasoning that explicitly integrates both spatial and temporal structure.
           </p>
           <br>
